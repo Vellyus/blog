@@ -8,4 +8,4 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 
 - Csináltam új Firebase projectet Realtime adatbázissal
 
-
+- Feltettem a routert + csináltam route-okat ( /home /admin /admin/blog )
