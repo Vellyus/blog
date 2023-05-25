@@ -1,5 +1,11 @@
 GitHub repo: https://github.com/Vellyus/blog
 
+Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedatabase.app/
+
 05.25
 
 - Létrehoztam az appot + kitöröltem a felesleges file-okat
+
+- Csináltam új Firebase projectet Realtime adatbázissal
+
+
