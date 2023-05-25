@@ -1,0 +1,5 @@
+GitHub repo: https://github.com/Vellyus/blog
+
+05.25
+
+- Létrehoztam az appot + kitöröltem a felesleges file-okat
