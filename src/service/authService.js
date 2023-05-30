@@ -2,7 +2,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 
 const auth = getAuth();
 
-export function register(auth, email, password) {
+export function register(email, password) {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
@@ -16,7 +16,7 @@ export function register(auth, email, password) {
     });
 }
 
-export function login(auth, email, password) {
+export function login(email, password) {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
@@ -29,7 +29,7 @@ export function login(auth, email, password) {
     });
 }
 
-export function logout(auth) {
+export function logout() {
   signOut(auth).then(() => {
     // Sign-out successful.
   }).catch((error) => {
