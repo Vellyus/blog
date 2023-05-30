@@ -1,11 +1,38 @@
-import { initializeApp } from "firebase/app";
-import { dbUrl } from '../constant';
-import { getDatabase, ref, child, get } from "firebase/database";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
-const firebaseConfig = {
-  databaseURL: dbUrl
-};
+const auth = getAuth();
 
-const app = initializeApp(firebaseConfig);
+export function register(auth, email, password) {
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+}
 
-const db = getDatabase();
+export function login(auth, email, password) {
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+}
+
+export function logout(auth) {
+  signOut(auth).then(() => {
+    // Sign-out successful.
+  }).catch((error) => {
+    // An error happened.
+  });
+}
