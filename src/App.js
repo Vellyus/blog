@@ -1,17 +1,13 @@
 import './App.css';
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
-import { Home } from "./pages/blog/Home";
-import { Admin } from "./pages/admin/Admin";
-import { AdminBlog } from "./pages/admin/AdminBlog";
-import { NotFound } from "./pages/blog/NotFound";
 import { getData } from './service/blogService';
+import { adminRoutes } from './routes/adminRoutes';
+import { blogRoutes } from './routes/blogRoutes';
 
 const router = createBrowserRouter([
-  { path: "/", element: <Home />, },
-  { path: "/admin", element: <Admin />, },
-  { path: "/admin/blog", element: <AdminBlog />, },
-  { path: "*", element: <NotFound /> }
+  { path: "/", children: blogRoutes },
+  { path: "/admin", children: adminRoutes }
 ]);
 
 console.log(getData());

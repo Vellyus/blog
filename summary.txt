@@ -25,3 +25,5 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 - Csináltam service könyvtárat, benne külön auth- és blogService file-okkal
 
 - A pages könytávon belül is szeparáltam az admin és blog elementeket
+
+- Külön file-okba szedtem az admin és a blog részhez tartozó route-okat, ezeket betettem egy routes nevű könyvtárba
