@@ -29,3 +29,5 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 - Külön file-okba szedtem az admin és a blog részhez tartozó route-okat, ezeket betettem egy routes nevű könyvtárba
 
 - Bemásoltam a Firebase docs-ból az auth függvényeket
+
+- A bejelentkező és a regisztráló formon már van state és az input mezőbe íráskor updatel
