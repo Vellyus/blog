@@ -17,3 +17,5 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 05.29
 
 - Ugyan nem ide tartozik, de feltettem a Malacka házipénztár appot GitHub Pages-re és raktam bele pár media query-t, hogy telefonon is kinézzen valahogy. Elég sokáig tartott megtalálni, hogy miért nem akar működni, de aztán meglett h a BrowserRouter helyett a HashRoutert szereti a GH Pages.
+
+- Telepítettem a firebase csomagot és csináltam egy függvényt ami lekéri a DB tartalmát
