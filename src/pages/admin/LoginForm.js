@@ -12,11 +12,11 @@ export function LoginForm({ changeForm }) {
       <h2>Sign In</h2>
       <form>
         <label htmlFor="email">
-          <input onChange={ handleInputChange } name="email" id="email" placeholder="E-mail" />
+          <input onChange={ handleInputChange } type="email" name="email" id="email" placeholder="E-mail" />
         </label>
 
         <label htmlFor="password">
-          <input onChange={ handleInputChange } name="password" id="password" placeholder="Password" />
+          <input onChange={ handleInputChange } type="password" name="password" id="password" placeholder="Password" />
         </label>
 
         <button type="submit">Submit</button>

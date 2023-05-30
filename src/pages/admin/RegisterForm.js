@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { register, login, logout } from "../../service/authService";
 
 export function RegisterForm({ changeForm }) {
   const [formState, setFormState] = useState();
@@ -7,19 +8,24 @@ export function RegisterForm({ changeForm }) {
     setFormState({ ...formState, [event.target.name]: event.target.value });
   };
 
+  const handleRegisterUser = (event) => {
+    event.preventDefault();
+    register(formState.email, formState.password);
+  };
+
   return (
     <>
       <h2>Sign Up</h2>
       <form>
         <label htmlFor="email">
-          <input onChange={ handleInputChange } name="email" id="email" placeholder="E-mail" />
+          <input onChange={ handleInputChange } type="email" name="email" id="email" placeholder="E-mail" />
         </label>
 
         <label htmlFor="password">
-          <input onChange={ handleInputChange } name="password" id="password" placeholder="Password" />
+          <input onChange={ handleInputChange } type="password" name="password" id="password" placeholder="Password" />
         </label>
 
-        <button type="submit">Submit</button>
+        <button onSubmit={ handleRegisterUser } type="submit">Submit</button>
       </form>
 
       <hr></hr>
