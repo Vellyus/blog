@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { register, login, logout } from "../../service/authService";
+import { useLoginContext, useLoginUpdateContext } from "../../LoginContext";
 
 export function RegisterForm({ changeForm }) {
   const [formState, setFormState] = useState();
+
+  const isLoggedIn = useLoginContext();
+  const toggleisLoggedIn = useLoginUpdateContext();
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -11,12 +15,17 @@ export function RegisterForm({ changeForm }) {
     setFormState({ ...formState, [event.target.name]: event.target.value });
   };
 
+  useEffect(() => {
+    console.log(isLoggedIn);
+  });
+
   const handleRegisterUser = (event) => {
     event.preventDefault();
     register(formState.email, formState.password);
     setFormState(null);
     emailRef.current.value = null;
     passwordRef.current.value = null;
+    toggleisLoggedIn();
   };
 
   return (

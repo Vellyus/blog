@@ -4,6 +4,7 @@ import { RouterProvider } from "react-router-dom";
 import { getData } from './service/blogService';
 import { adminRoutes } from './routes/adminRoutes';
 import { blogRoutes } from './routes/blogRoutes';
+import { LoginProvider } from './LoginContext';
 
 const router = createBrowserRouter([
   { path: "/", children: blogRoutes },
@@ -13,7 +14,11 @@ const router = createBrowserRouter([
 console.log(getData());
 
 function App() {
-  return <RouterProvider router={ router } />;
+  return (
+    <LoginProvider>
+      <RouterProvider router={ router } />
+    </LoginProvider>
+  );
 };
 
 export default App;

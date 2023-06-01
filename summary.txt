@@ -33,3 +33,7 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 - A bejelentkező és a regisztráló formon már van state és az input mezőbe íráskor updatel
 
 - Már lehet felhasználót regisztrálni, a form egyelőre csak resetel utána
+
+06.01
+
+- Megcsináltam a context-et és a felhasználó regisztrálása után updatel, jelezve hogy be van jelentkezve
