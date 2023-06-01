@@ -16,7 +16,7 @@ export function RegisterForm({ changeForm }) {
   };
 
   useEffect(() => {
-    console.log(isLoggedIn);
+    console.log("isUserLoggedIn?: ", isLoggedIn);
   });
 
   const handleRegisterUser = (event) => {
