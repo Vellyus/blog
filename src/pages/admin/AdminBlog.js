@@ -23,7 +23,7 @@ export function AdminBlog() {
   return (
     <>
       <h1>AdminBlog</h1>
-      <button onClick={ handleLogout }>Logout</button>
+      <button onClick={ handleLogout }>Sign out</button>
     </>
   );
 }
