@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { register, login, logout } from "../../service/authService";
+import { useRef, useState } from "react";
+import { register } from "../../service/authService";
 import { useLoginContext, useLoginUpdateContext } from "../../LoginContext";
 import { useNavigate } from "react-router-dom";
 
@@ -18,18 +18,19 @@ export function RegisterForm({ changeForm }) {
     setFormState({ ...formState, [event.target.name]: event.target.value });
   };
 
-  useEffect(() => {
-    console.log("isUserLoggedIn?: ", isLoggedIn);
-  });
-
   const handleRegisterUser = (event) => {
     event.preventDefault();
-    register(formState.email, formState.password);
-    setFormState(null);
-    emailRef.current.value = null;
-    passwordRef.current.value = null;
-    toggleisLoggedIn();
-    navigate("/admin/blog", { replace: true });
+    register(formState.email, formState.password).then((user) => {
+      if (user) {
+        setFormState(null);
+        emailRef.current.value = null;
+        passwordRef.current.value = null;
+        toggleisLoggedIn();
+        navigate("/admin/blog", { replace: true });
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
   };
 
   return (

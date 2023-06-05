@@ -8,10 +8,11 @@ const db = getDatabase();
 const auth = getAuth();
 
 export function register(email, password) {
-  createUserWithEmailAndPassword(auth, email, password)
+  return createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
       console.log(user);
+      return user;
     })
     .catch((error) => {
       console.log(error);
@@ -19,10 +20,11 @@ export function register(email, password) {
 }
 
 export function login(email, password) {
-  signInWithEmailAndPassword(auth, email, password)
+  return signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
       console.log(user);
+      return user;
     })
     .catch((error) => {
       console.log(error);
@@ -30,7 +32,7 @@ export function login(email, password) {
 }
 
 export function logout() {
-  signOut(auth).then(() => {
+  return signOut(auth).then(() => {
     console.log("signed out");
   }).catch((error) => {
     console.log(error);
