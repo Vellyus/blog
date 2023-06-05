@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { register, login, logout } from "../../service/authService";
 import { useLoginContext, useLoginUpdateContext } from "../../LoginContext";
+import { useNavigate } from "react-router-dom";
 
 export function RegisterForm({ changeForm }) {
   const [formState, setFormState] = useState();
@@ -10,6 +11,8 @@ export function RegisterForm({ changeForm }) {
 
   const emailRef = useRef();
   const passwordRef = useRef();
+
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     setFormState({ ...formState, [event.target.name]: event.target.value });
@@ -26,6 +29,7 @@ export function RegisterForm({ changeForm }) {
     emailRef.current.value = null;
     passwordRef.current.value = null;
     toggleisLoggedIn();
+    navigate("/admin/blog", { replace: true });
   };
 
   return (
