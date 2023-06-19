@@ -44,3 +44,7 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 - Elvileg megvan a login és a logout is. Remélem mindent úgy csináltam, ahogy kell, de nem vagyok benne biztos :)
 
 - Az admin oldalról átirányít ha sikeres a form submission, a /admin/blog oldalról pedig vissza ha nincs belépve user
+
+06.19
+
+- Töröltem a ref-eket a formokból

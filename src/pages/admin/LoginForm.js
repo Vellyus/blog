@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { login } from "../../service/authService";
 import { useLoginContext, useLoginUpdateContext } from "../../LoginContext";
 import { useNavigate } from "react-router-dom";
@@ -8,9 +8,6 @@ export function LoginForm({ changeForm }) {
 
   const isLoggedIn = useLoginContext();
   const toggleisLoggedIn = useLoginUpdateContext();
-
-  const emailRef = useRef();
-  const passwordRef = useRef();
 
   const navigate = useNavigate();
 
@@ -23,8 +20,6 @@ export function LoginForm({ changeForm }) {
     login(formState.email, formState.password).then(user => {
       if (user) {
         setFormState(null);
-        emailRef.current.value = null;
-        passwordRef.current.value = null;
         toggleisLoggedIn();
         navigate("/admin/blog", { replace: true });
       }
@@ -38,11 +33,11 @@ export function LoginForm({ changeForm }) {
       <h2>Sign In</h2>
       <form onSubmit={ handleLoginUser }>
         <label htmlFor="email">
-          <input onChange={ handleInputChange } type="email" name="email" id="email" placeholder="E-mail" ref={ emailRef } />
+          <input onChange={ handleInputChange } type="email" name="email" id="email" placeholder="E-mail" />
         </label>
 
         <label htmlFor="password">
-          <input onChange={ handleInputChange } type="password" name="password" id="password" placeholder="Password" ref={ passwordRef } />
+          <input onChange={ handleInputChange } type="password" name="password" id="password" placeholder="Password" />
         </label>
 
         <button type="submit">Submit</button>
