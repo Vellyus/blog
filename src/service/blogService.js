@@ -2,9 +2,10 @@ import { getDatabase, ref, child, get } from "firebase/database";
 
 export function getData() {
   const dbRef = ref(getDatabase());
-  get(child(dbRef, "/")).then((snapshot) => {
+  return get(child(dbRef, "/")).then((snapshot) => {
     if (snapshot.exists()) {
-      console.log(snapshot.val());
+      // console.log(snapshot.val());
+      return snapshot.val();
     } else {
       console.log("No data available");
     }

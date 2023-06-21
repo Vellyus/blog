@@ -48,3 +48,7 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 06.19
 
 - Töröltem a ref-eket a formokból
+
+06.21
+
+- A főoldalon megjelennek a blog postok, egyelőre stílus nélkül
