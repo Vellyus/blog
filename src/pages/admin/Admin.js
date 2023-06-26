@@ -3,7 +3,7 @@ import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 
 export function Admin() {
-  const [formState, setFormState] = useState("register");
+  const [formState, setFormState] = useState("login");
 
   const handleFormState = () => {
     setFormState(state => state === "login" ? "register" : "login");
