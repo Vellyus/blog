@@ -52,3 +52,9 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 06.21
 
 - A főoldalon megjelennek a blog postok, egyelőre stílus nélkül
+
+06.26
+
+- Már lehet új blog postot bevinni, az input mezőket majd később lecserélem textArea-ra, csak gondoltam egyelőre a működésre fókuszálok aztán majd később kiszépítem
+
+- Megint visszaállítottam a default formot a bejelentkezősre, valszeg úgyis az lesz többször használva
