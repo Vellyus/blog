@@ -1,7 +1,12 @@
-import { getDatabase, ref, child, get } from "firebase/database";
+import { getDatabase, ref, child, get, set } from "firebase/database";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../constant";
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase();
+const dbRef = ref(getDatabase());
 
 export function getData() {
-  const dbRef = ref(getDatabase());
   return get(child(dbRef, "/")).then((snapshot) => {
     if (snapshot.exists()) {
       // console.log(snapshot.val());
@@ -12,4 +17,18 @@ export function getData() {
   }).catch((error) => {
     console.error(error);
   });
+}
+
+export function addOrEditBlogPost(id, title, lead, body) {
+  const reference = ref(db, id);
+  return set(reference, {
+    title: title,
+    lead: lead,
+    body: body
+  });
+}
+
+export function removeBlogPost(id) {
+  const reference = ref(db, id);
+  set(reference, null);
 }

@@ -1,9 +1,32 @@
 import { logout } from "../../service/authService";
 import { useLoginContext, useLoginUpdateContext } from "../../LoginContext";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { addOrEditBlogPost } from "../../service/blogService.js";
+
 
 export function AdminBlog() {
+
+  const [formData, setFormData] = useState(null);
+  const [submit, setSubmit] = useState(false);
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      addOrEditBlogPost(crypto.randomUUID(), formData.title, formData.lead, formData.body);
+      setSubmit(!submit);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleFormReset = () => {
+    setSubmit(!submit);
+  };
 
   const isLoggedIn = useLoginContext();
   const toggleisLoggedIn = useLoginUpdateContext();
@@ -24,6 +47,26 @@ export function AdminBlog() {
     <>
       <h1>AdminBlog</h1>
       <button onClick={ handleLogout }>Sign out</button>
+
+      { !submit ? (
+        <form onSubmit={ handleSubmit } id="newSpendingForm" action="submit-form.php" method="post">
+          <label htmlFor="title">Cím:
+            <input onChange={ handleInputChange } type="text" id="title" name="title" placeholder="" /></label>
+
+          <label htmlFor="lead">Bevezető:
+            <input onChange={ handleInputChange } type="text" id="lead" name="lead" placeholder="" /></label>
+
+          <label htmlFor="body">Tartalom:
+            <input onChange={ handleInputChange } type="text" id="body" name="body" placeholder="" /></label>
+
+          <button type="submit" value="Submit">Mentés</button>
+        </form>
+      ) : (<div className="submitted">
+        <h3>Sikeresen mentve!</h3>
+        <button onClick={ handleFormReset }>Új blog post</button>
+      </div>) }
+
+
     </>
   );
 }
