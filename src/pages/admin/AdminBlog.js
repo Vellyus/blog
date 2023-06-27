@@ -3,12 +3,20 @@ import { useLoginContext, useLoginUpdateContext } from "../../LoginContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { addOrEditBlogPost } from "../../service/blogService.js";
+import { getData } from "../../service/blogService.js";
+import { dbUrl } from "../../constant";
 
 
 export function AdminBlog() {
 
   const [formData, setFormData] = useState(null);
   const [submit, setSubmit] = useState(false);
+  const [blogPosts, setBlogPosts] = useState();
+
+  useEffect(() => {
+    getData(dbUrl).then(data => setBlogPosts(data));
+  }, [blogPosts]);
+
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -65,6 +73,21 @@ export function AdminBlog() {
         <h3>Sikeresen mentve!</h3>
         <button onClick={ handleFormReset }>Új blog post</button>
       </div>) }
+
+      <hr></hr>
+      <h2>Blog posts:</h2>
+
+      {
+        blogPosts && Object.keys(blogPosts).map((post, i) => {
+          return (
+            <article key={ i }>
+              <h2>{ blogPosts[post].title }</h2>
+              <p>{ blogPosts[post].lead }</p>
+              <p>{ blogPosts[post].body }</p>
+            </article>
+          );
+        })
+      }
 
 
     </>
