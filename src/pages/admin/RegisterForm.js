@@ -30,22 +30,22 @@ export function RegisterForm({ changeForm }) {
 
   return (
     <>
-      <h2>Sign Up</h2>
+      <h2>Regisztrálj!</h2>
       <form onSubmit={ handleRegisterUser }>
         <label htmlFor="email">
           <input onChange={ handleInputChange } type="email" name="email" id="email" placeholder="E-mail" />
         </label>
 
         <label htmlFor="password">
-          <input onChange={ handleInputChange } type="password" name="password" id="password" placeholder="Password" />
+          <input onChange={ handleInputChange } type="password" name="password" id="password" placeholder="Jelszó" />
         </label>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Regisztráció</button>
       </form>
 
       <hr></hr>
 
-      <button onClick={ changeForm }>I already have an account</button>
+      <button onClick={ changeForm }>Már van fiókom</button>
     </>
   );
 }

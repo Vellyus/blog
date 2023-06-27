@@ -54,7 +54,7 @@ export function AdminBlog() {
   return (
     <>
       <h1>AdminBlog</h1>
-      <button onClick={ handleLogout }>Sign out</button>
+      <button onClick={ handleLogout }>Kijelentkezés</button>
 
       { !submit ? (
         <form onSubmit={ handleSubmit } id="newSpendingForm" action="submit-form.php" method="post">

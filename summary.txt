@@ -62,3 +62,5 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 06.27
 
 - A blog postok már az adminblog oldalon is megjelennek
+
+- Rájöttem, hogy a tartalom fele angol, a másik fele meg magyar úgyhogy mindent átírtam magyarra

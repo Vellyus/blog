@@ -13,7 +13,7 @@ export function Home() {
 
   return (
     <>
-      <h1>Home</h1>
+      <h1>Főoldal</h1>
       {
         blogPosts && Object.keys(blogPosts).map((post, i) => {
           return (

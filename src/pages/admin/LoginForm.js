@@ -30,22 +30,22 @@ export function LoginForm({ changeForm }) {
 
   return (
     <>
-      <h2>Sign In</h2>
+      <h2>Jelentkezz be!</h2>
       <form onSubmit={ handleLoginUser }>
         <label htmlFor="email">
           <input onChange={ handleInputChange } type="email" name="email" id="email" placeholder="E-mail" />
         </label>
 
         <label htmlFor="password">
-          <input onChange={ handleInputChange } type="password" name="password" id="password" placeholder="Password" />
+          <input onChange={ handleInputChange } type="password" name="password" id="password" placeholder="Jelszó" />
         </label>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Bejelentkezés</button>
       </form>
 
       <hr></hr>
 
-      <button onClick={ changeForm }> I don't have an account</button>
+      <button onClick={ changeForm }>Még nincs fiókom</button>
     </>
   );
 }
