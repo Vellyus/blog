@@ -75,7 +75,7 @@ export function AdminBlog() {
       </div>) }
 
       <hr></hr>
-      <h2>Blog posts:</h2>
+      <h2>Blog bejegyzések:</h2>
 
       {
         blogPosts && Object.keys(blogPosts).map((post, i) => {
