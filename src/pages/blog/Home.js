@@ -20,7 +20,7 @@ export function Home() {
             <article key={ i }>
               <h2>{ blogPosts[post].title }</h2>
               <p>{ blogPosts[post].lead }</p>
-              <p>{ blogPosts[post].body }</p>
+              <button>Teljes bejegyzés</button>
             </article>
           );
         })
