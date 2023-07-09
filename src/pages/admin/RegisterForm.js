@@ -11,6 +11,10 @@ export function RegisterForm({ changeForm }) {
 
   const navigate = useNavigate();
 
+  const handleNavToMainPage = () => {
+    navigate(`/`, { replace: true });
+  };
+
   const handleInputChange = (event) => {
     setFormState({ ...formState, [event.target.name]: event.target.value });
   };
@@ -46,6 +50,7 @@ export function RegisterForm({ changeForm }) {
       <hr></hr>
 
       <button onClick={ changeForm }>Már van fiókom</button>
+      <button className="backHome" onClick={ handleNavToMainPage }>Vissza a főoldalra</button>
     </>
   );
 }

@@ -11,6 +11,10 @@ export function LoginForm({ changeForm }) {
 
   const navigate = useNavigate();
 
+  const handleNavToMainPage = () => {
+    navigate(`/`, { replace: true });
+  };
+
   const handleInputChange = (event) => {
     setFormState({ ...formState, [event.target.name]: event.target.value });
   };
@@ -46,6 +50,8 @@ export function LoginForm({ changeForm }) {
       <hr></hr>
 
       <button onClick={ changeForm }>Még nincs fiókom</button>
+      <button className="backHome" onClick={ handleNavToMainPage }>Vissza a főoldalra</button>
+
     </>
   );
 }
