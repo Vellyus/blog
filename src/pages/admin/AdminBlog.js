@@ -2,7 +2,7 @@ import { logout } from "../../service/authService";
 import { useLoginContext, useLoginUpdateContext } from "../../LoginContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { addOrEditBlogPost } from "../../service/blogService.js";
+import { addOrEditBlogPost, removeBlogPost } from "../../service/blogService.js";
 import { getData } from "../../service/blogService.js";
 import { dbUrl } from "../../constant";
 
@@ -20,6 +20,10 @@ export function AdminBlog() {
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleRemoveArticle = (id) => {
+    removeBlogPost(id);
   };
 
   const handleSubmit = (e) => {
@@ -78,13 +82,13 @@ export function AdminBlog() {
       <h2>Blog bejegyzések:</h2>
 
       {
-        blogPosts && Object.keys(blogPosts).map((post, i) => {
+        blogPosts && Object.keys(blogPosts).map((post) => {
           return (
-            <article key={ i }>
+            <article key={ post }>
               <h3>{ blogPosts[post].title }</h3>
               <p>{ blogPosts[post].lead }</p>
               <p>{ blogPosts[post].body }</p>
-              <button className="removeButton">Remove article</button>
+              <button className="removeButton" onClick={ () => handleRemoveArticle(post) }>Remove article</button>
             </article>
           );
         })
