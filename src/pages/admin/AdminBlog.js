@@ -62,10 +62,10 @@ export function AdminBlog() {
             <input onChange={ handleInputChange } type="text" id="title" name="title" placeholder="" /></label>
 
           <label htmlFor="lead">Bevezető:
-            <input onChange={ handleInputChange } type="text" id="lead" name="lead" placeholder="" /></label>
+            <textarea onChange={ handleInputChange } type="text" id="lead" name="lead" placeholder="" /></label>
 
           <label htmlFor="body">Tartalom:
-            <input onChange={ handleInputChange } type="text" id="body" name="body" placeholder="" /></label>
+            <textarea onChange={ handleInputChange } type="text" id="body" name="body" placeholder="" /></label>
 
           <button type="submit" value="Submit">Mentés</button>
         </form>
@@ -81,9 +81,10 @@ export function AdminBlog() {
         blogPosts && Object.keys(blogPosts).map((post, i) => {
           return (
             <article key={ i }>
-              <h2>{ blogPosts[post].title }</h2>
+              <h3>{ blogPosts[post].title }</h3>
               <p>{ blogPosts[post].lead }</p>
               <p>{ blogPosts[post].body }</p>
+              <button className="removeButton">Remove article</button>
             </article>
           );
         })
