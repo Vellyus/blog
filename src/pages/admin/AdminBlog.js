@@ -26,11 +26,12 @@ export function AdminBlog() {
     removeBlogPost(id);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      addOrEditBlogPost(crypto.randomUUID(), formData.title, formData.lead, formData.body);
+      await addOrEditBlogPost(crypto.randomUUID(), formData.title, formData.lead, formData.body);
       setSubmit(!submit);
+      getData(dbUrl).then(data => setBlogPosts(data));
     } catch (error) {
       console.log(error);
     }
@@ -79,7 +80,7 @@ export function AdminBlog() {
       </div>) }
 
       <hr></hr>
-      <h2>Blog bejegyzések:</h2>
+      <h2 id="articles-title">Blog bejegyzések:</h2>
 
       {
         blogPosts && Object.keys(blogPosts).map((post) => {
