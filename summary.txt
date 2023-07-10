@@ -74,3 +74,9 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 - Most már működik a törlés gomb
 
 - A főoldalon minden bejegyzésről levettem a tartalom részt és helyette beraktam egy gombot ami a slug url-re irányít, ahol megtekinthető az egész post. Itt a single post pagen van egy vissza a főoldalra gomb is. A bejelentkezős és regisztrálós formhoz is raktam ilyen vissza gombot.
+
+
+07.10
+
+- Beraktam egy szerkesztés gombot az adminBlog lapra (még nem működik) + magyarra javítottam a törlés gomb szövegét
+

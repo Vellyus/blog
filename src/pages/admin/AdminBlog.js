@@ -26,6 +26,10 @@ export function AdminBlog() {
     removeBlogPost(id);
   };
 
+  const showEditForm = (id) => {
+
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -89,7 +93,8 @@ export function AdminBlog() {
               <h3>{ blogPosts[post].title }</h3>
               <p>{ blogPosts[post].lead }</p>
               <p>{ blogPosts[post].body }</p>
-              <button className="removeButton" onClick={ () => handleRemoveArticle(post) }>Remove article</button>
+              <button className="editButton" onClick={ () => showEditForm(post) }>Szerkesztés</button>
+              <button className="removeButton" onClick={ () => handleRemoveArticle(post) }>Törlés</button>
             </article>
           );
         })

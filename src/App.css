@@ -81,8 +81,15 @@ button {
 }
 
 .removeButton {
+  width: 12rem;
   background-color: rgb(255, 69, 37);
 }
+
+.editButton {
+  width: 12rem;
+  background-color: rgb(248, 144, 17);
+}
+
 
 hr {
   margin: 4rem 0;
