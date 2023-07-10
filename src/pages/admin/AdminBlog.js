@@ -12,6 +12,7 @@ export function AdminBlog() {
   const [formData, setFormData] = useState(null);
   const [submit, setSubmit] = useState(false);
   const [blogPosts, setBlogPosts] = useState();
+  const [editModeId, setEditModeId] = useState(null);
 
   useEffect(() => {
     getData(dbUrl).then(data => setBlogPosts(data));
@@ -27,10 +28,15 @@ export function AdminBlog() {
   };
 
   const showEditForm = (id) => {
-
+    setEditModeId(id);
+    setFormData({
+      title: blogPosts[id].title,
+      lead: blogPosts[id].lead,
+      body: blogPosts[id].body
+    });
   };
 
-  const handleSubmit = async (e) => {
+  const handleNewArticle = async (e) => {
     e.preventDefault();
     try {
       await addOrEditBlogPost(crypto.randomUUID(), formData.title, formData.lead, formData.body);
@@ -41,6 +47,17 @@ export function AdminBlog() {
     }
   };
 
+  const handleEditArticle = async (e) => {
+    e.preventDefault();
+    try {
+      await addOrEditBlogPost(editModeId, formData.title, formData.lead, formData.body);
+      setEditModeId(null);
+      setSubmit(!submit);
+      getData(dbUrl).then(data => setBlogPosts(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleFormReset = () => {
     setSubmit(!submit);
   };
@@ -65,23 +82,48 @@ export function AdminBlog() {
       <h1>AdminBlog</h1>
       <button onClick={ handleLogout }>Kijelentkezés</button>
 
+      {/*
+       Try to separate the add and edit forms!
+       App breaks when you edit a post and change some imputs but cancel the changes
+      */ }
+
       { !submit ? (
-        <form onSubmit={ handleSubmit } id="newSpendingForm" action="submit-form.php" method="post">
-          <label htmlFor="title">Cím:
-            <input onChange={ handleInputChange } type="text" id="title" name="title" placeholder="" /></label>
+        editModeId !== null ? (
+          <form onSubmit={ handleEditArticle } id="newSpendingForm" action="submit-form.php" method="post">
+            <h3>Szerkesztés</h3>
+            <label htmlFor="title">Cím:
+              <input onChange={ handleInputChange } type="text" id="title" name="title" placeholder="" defaultValue={ blogPosts[editModeId].title } /></label>
 
-          <label htmlFor="lead">Bevezető:
-            <textarea onChange={ handleInputChange } type="text" id="lead" name="lead" placeholder="" /></label>
+            <label htmlFor="lead">Bevezető:
+              <textarea onChange={ handleInputChange } type="text" id="lead" name="lead" placeholder="" defaultValue={ blogPosts[editModeId].lead } /></label>
 
-          <label htmlFor="body">Tartalom:
-            <textarea onChange={ handleInputChange } type="text" id="body" name="body" placeholder="" /></label>
+            <label htmlFor="body">Tartalom:
+              <textarea onChange={ handleInputChange } type="text" id="body" name="body" placeholder="" defaultValue={ blogPosts[editModeId].body } /></label>
 
-          <button type="submit" value="Submit">Mentés</button>
-        </form>
-      ) : (<div className="submitted">
-        <h3>Sikeresen mentve!</h3>
-        <button onClick={ handleFormReset }>Új blog post</button>
-      </div>) }
+            <button type="submit" value="Submit">Mentés</button>
+            <button onClick={ () => {
+              setEditModeId(null);
+              setSubmit(false);
+            } }>Vissza</button>
+          </form>
+        ) : (
+          <form onSubmit={ handleNewArticle } id="newSpendingForm" action="submit-form.php" method="post">
+            <label htmlFor="title">Cím:
+              <input onChange={ handleInputChange } type="text" id="title" name="title" placeholder="" defaultValue={ "" } /></label>
+
+            <label htmlFor="lead">Bevezető:
+              <textarea onChange={ handleInputChange } type="text" id="lead" name="lead" placeholder="" defaultValue={ "" } /></label>
+
+            <label htmlFor="body">Tartalom:
+              <textarea onChange={ handleInputChange } type="text" id="body" name="body" placeholder="" defaultValue={ "" } /></label>
+
+            <button type="submit" value="Submit">Mentés</button>
+          </form>
+        )) : (<div className="submitted">
+          <h3>Sikeresen mentve!</h3>
+          <button onClick={ handleFormReset }>Új blog post</button>
+        </div>)
+      }
 
       <hr></hr>
       <h2 id="articles-title">Blog bejegyzések:</h2>

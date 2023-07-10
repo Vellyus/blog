@@ -80,3 +80,4 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 
 - Beraktam egy szerkesztés gombot az adminBlog lapra (még nem működik) + magyarra javítottam a törlés gomb szövegét
 
+- Nagyjából működik a szerkesztés. Ha szerkesztek egy postot, aztán átírok valamit, de mentés helyett visszalépek nem mindig resetel az input értéke. Még dolgozok rajta.
