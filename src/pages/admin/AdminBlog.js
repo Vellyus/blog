@@ -83,8 +83,8 @@ export function AdminBlog() {
       <button onClick={ handleLogout }>Kijelentkezés</button>
 
       {/*
-       Try to separate the add and edit forms!
-       App breaks when you edit a post and change some imputs but cancel the changes
+      Only change the handleSubmit function with the ternary operator and reset the input values with refs
+      + hide the blog articles while in edit mode
       */ }
 
       { !submit ? (
