@@ -95,7 +95,7 @@ export function AdminBlog() {
       <button onClick={ handleLogout }>Kijelentkezés</button>
 
       { !submit ? (
-        <form onSubmit={ editModeId !== null ? (handleEditArticle) : (handleNewArticle) } id="newSpendingForm" action="submit-form.php" method="post">
+        <form onSubmit={ editModeId !== null ? (handleEditArticle) : (handleNewArticle) } id="editOrCreateArticleForm" action="submit-form.php" method="post">
           <h3>Szerkesztés</h3>
           <label htmlFor="title">Cím:
             <input onChange={ handleInputChange } type="text" id="title" name="title" placeholder="" ref={ titleRef } /></label>
