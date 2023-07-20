@@ -1,7 +1,7 @@
 import { logout } from "../../service/authService";
 import { useLoginContext, useLoginUpdateContext } from "../../LoginContext";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { addOrEditBlogPost, removeBlogPost } from "../../service/blogService.js";
 import { getData } from "../../service/blogService.js";
 import { dbUrl } from "../../constant";
@@ -13,6 +13,10 @@ export function AdminBlog() {
   const [submit, setSubmit] = useState(false);
   const [blogPosts, setBlogPosts] = useState();
   const [editModeId, setEditModeId] = useState(null);
+
+  const titleRef = useRef();
+  const leadRef = useRef();
+  const bodyRef = useRef();
 
   useEffect(() => {
     getData(dbUrl).then(data => setBlogPosts(data));
@@ -77,52 +81,46 @@ export function AdminBlog() {
     !isLoggedIn && navigate("/admin", { replace: true });
   });
 
+  useEffect(() => {
+    if (editModeId !== null) {
+      titleRef.current.value = blogPosts[editModeId].title;
+      leadRef.current.value = blogPosts[editModeId].lead;
+      bodyRef.current.value = blogPosts[editModeId].body;
+    }
+  }, [editModeId]);
+
   return (
     <>
       <h1>AdminBlog</h1>
       <button onClick={ handleLogout }>Kijelentkezés</button>
 
-      {/*
-      Only change the handleSubmit function with the ternary operator and reset the input values with refs
-      + hide the blog articles while in edit mode
-      */ }
-
       { !submit ? (
-        editModeId !== null ? (
-          <form onSubmit={ handleEditArticle } id="newSpendingForm" action="submit-form.php" method="post">
-            <h3>Szerkesztés</h3>
-            <label htmlFor="title">Cím:
-              <input onChange={ handleInputChange } type="text" id="title" name="title" placeholder="" defaultValue={ blogPosts[editModeId].title } /></label>
+        <form onSubmit={ editModeId !== null ? (handleEditArticle) : (handleNewArticle) } id="newSpendingForm" action="submit-form.php" method="post">
+          <h3>Szerkesztés</h3>
+          <label htmlFor="title">Cím:
+            <input onChange={ handleInputChange } type="text" id="title" name="title" placeholder="" ref={ titleRef } /></label>
 
-            <label htmlFor="lead">Bevezető:
-              <textarea onChange={ handleInputChange } type="text" id="lead" name="lead" placeholder="" defaultValue={ blogPosts[editModeId].lead } /></label>
+          <label htmlFor="lead">Bevezető:
+            <textarea onChange={ handleInputChange } type="text" id="lead" name="lead" placeholder="" ref={ leadRef } /></label>
 
-            <label htmlFor="body">Tartalom:
-              <textarea onChange={ handleInputChange } type="text" id="body" name="body" placeholder="" defaultValue={ blogPosts[editModeId].body } /></label>
+          <label htmlFor="body">Tartalom:
+            <textarea onChange={ handleInputChange } type="text" id="body" name="body" placeholder="" ref={ bodyRef } /></label>
 
-            <button type="submit" value="Submit">Mentés</button>
+          <button type="submit" value="Submit">Mentés</button>
+          { editModeId !== null ? (
             <button onClick={ () => {
               setEditModeId(null);
               setSubmit(false);
+              titleRef.current.value = "";
+              leadRef.current.value = "";
+              bodyRef.current.value = "";
             } }>Vissza</button>
-          </form>
-        ) : (
-          <form onSubmit={ handleNewArticle } id="newSpendingForm" action="submit-form.php" method="post">
-            <label htmlFor="title">Cím:
-              <input onChange={ handleInputChange } type="text" id="title" name="title" placeholder="" defaultValue={ "" } /></label>
-
-            <label htmlFor="lead">Bevezető:
-              <textarea onChange={ handleInputChange } type="text" id="lead" name="lead" placeholder="" defaultValue={ "" } /></label>
-
-            <label htmlFor="body">Tartalom:
-              <textarea onChange={ handleInputChange } type="text" id="body" name="body" placeholder="" defaultValue={ "" } /></label>
-
-            <button type="submit" value="Submit">Mentés</button>
-          </form>
-        )) : (<div className="submitted">
-          <h3>Sikeresen mentve!</h3>
-          <button onClick={ handleFormReset }>Új blog post</button>
-        </div>)
+          ) : (null) }
+        </form>
+      ) : (<div className="submitted">
+        <h3>Sikeresen mentve!</h3>
+        <button onClick={ handleFormReset }>Új blog post</button>
+      </div>)
       }
 
       <hr></hr>
