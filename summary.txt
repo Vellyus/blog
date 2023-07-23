@@ -85,3 +85,7 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 07.20
 
 - Megoldottam a "nem mindig resetel az input a formon visszalépés után" problémát. Az volt a baj, hogy state alapján külön formokat töltöttem be és mire resetelte volna a function az inputok értékét már nem mindig az a form volt renderelve. Most egy form van és state alapján csak a submit function-t cserélem benne.
+
+07.22
+
+- Felraktam a slugify-t és a generált random id helyett most a slug van elmentve id-ként az adatbázisban + a felhasználó is ezen éri el a teljes bejegyzést.

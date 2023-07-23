@@ -18,6 +18,8 @@ export function AdminBlog() {
   const leadRef = useRef();
   const bodyRef = useRef();
 
+  const slugify = require("slugify");
+
   useEffect(() => {
     getData(dbUrl).then(data => setBlogPosts(data));
   }, [blogPosts]);
@@ -43,7 +45,7 @@ export function AdminBlog() {
   const handleNewArticle = async (e) => {
     e.preventDefault();
     try {
-      await addOrEditBlogPost(crypto.randomUUID(), formData.title, formData.lead, formData.body);
+      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.title, formData.lead, formData.body);
       setSubmit(!submit);
       getData(dbUrl).then(data => setBlogPosts(data));
     } catch (error) {
