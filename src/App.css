@@ -49,6 +49,10 @@ input {
   display: block;
 }
 
+#fileInput {
+  width: 30rem;
+}
+
 #newSpendingForm input {
   width: 30rem;
 }

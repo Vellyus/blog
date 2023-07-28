@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { addOrEditBlogPost, removeBlogPost } from "../../service/blogService.js";
 import { getData } from "../../service/blogService.js";
-import { dbUrl } from "../../constant";
-
+import { dbUrl, storage } from "../../constant";
+import { ref, uploadBytes } from "firebase/storage";
 
 export function AdminBlog() {
 
@@ -19,6 +19,17 @@ export function AdminBlog() {
   const bodyRef = useRef();
 
   const slugify = require("slugify");
+
+  const [imageToUpload, setImageToUpload] = useState(null);
+
+  const uploadImage = () => {
+    if (imageToUpload == null) return;
+
+    const imagesRef = ref(storage, `images/${ imageToUpload.name + crypto.randomUUID() }`);
+    uploadBytes(imagesRef, imageToUpload).then(() => {
+      console.log("image uploaded");
+    });
+  };
 
   useEffect(() => {
     getData(dbUrl).then(data => setBlogPosts(data));
@@ -46,6 +57,7 @@ export function AdminBlog() {
     e.preventDefault();
     try {
       await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.title, formData.lead, formData.body);
+      await uploadImage(imageToUpload);
       setSubmit(!submit);
       getData(dbUrl).then(data => setBlogPosts(data));
     } catch (error) {
@@ -98,7 +110,11 @@ export function AdminBlog() {
 
       { !submit ? (
         <form onSubmit={ editModeId !== null ? (handleEditArticle) : (handleNewArticle) } id="editOrCreateArticleForm" action="submit-form.php" method="post">
-          <h3>Szerkesztés</h3>
+          { editModeId !== null ? (<h3>Szerkesztés</h3>) : (null) }
+
+          <label htmlFor="fileInput">
+            <input type="file" id="fileInput" onChange={ (event) => { setImageToUpload(event.target.files[0]); } }></input></label>
+
           <label htmlFor="title">Cím:
             <input onChange={ handleInputChange } type="text" id="title" name="title" placeholder="" ref={ titleRef } /></label>
 

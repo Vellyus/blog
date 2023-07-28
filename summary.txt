@@ -89,3 +89,7 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 07.22
 
 - Felraktam a slugify-t és a generált random id helyett most a slug van elmentve id-ként az adatbázisban + a felhasználó is ezen éri el a teljes bejegyzést.
+
+07.28
+
+- A képfeltöltés működik csak még hozzá kell csatolni a bejegyzéshez
