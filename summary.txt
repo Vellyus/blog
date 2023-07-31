@@ -93,3 +93,7 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 07.28
 
 - A képfeltöltés működik csak még hozzá kell csatolni a bejegyzéshez
+
+07.31
+
+- A bejegyzéshez csatoltam a kép id-jét, de a képet nem mindig tölti fel storage-ba. Valamiért ha submitkor intputból akarom feltölteni csak az tulajdonságait menti és nem magát a képet. Viszont ha state-ből töltöm fel néha még nincs meg a state mire submitelek.

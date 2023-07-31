@@ -14,27 +14,53 @@ export function AdminBlog() {
   const [blogPosts, setBlogPosts] = useState();
   const [editModeId, setEditModeId] = useState(null);
 
+  const imageRef = useRef();
   const titleRef = useRef();
   const leadRef = useRef();
   const bodyRef = useRef();
+  const submitButton = useRef();
 
   const slugify = require("slugify");
 
   const [imageToUpload, setImageToUpload] = useState(null);
+  const [imageToUploadId, setImageToUploadId] = useState(null);
 
-  const uploadImage = () => {
-    if (imageToUpload == null) return;
+  const uploadImage = async () => {
+    // state is still null on submitting
 
-    const imagesRef = ref(storage, `images/${ imageToUpload.name + crypto.randomUUID() }`);
-    uploadBytes(imagesRef, imageToUpload).then(() => {
-      console.log("image uploaded");
-    });
+    // if (imageToUpload == null || imageToUploadId == null) return;
+    try {
+      const imagesRef = ref(storage, `images/${ imageToUploadId }`);
+      await uploadBytes(imagesRef, imageToUpload).then(() => {
+        console.log("image uploaded");
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     getData(dbUrl).then(data => setBlogPosts(data));
   }, [blogPosts]);
 
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+
+  // button does not rerender?
+  useEffect(() => {
+    if (imageRef?.current?.value !== "" && (imageToUpload === null || imageToUpload === undefined)) {
+      setIsSubmitDisabled(true);
+    } else setIsSubmitDisabled(false);
+
+    // if (imageRef.current.value !== "" && (imageToUpload === null || imageToUpload === undefined)) {
+    //   submitButton.current.disabled = "true";
+    // } else submitButton.current.disabled = "false";
+
+    // if (imageRef?.current?.value !== "" && imageToUpload !== null) {
+    //   submitButton.current.disabled = "false";
+    // }
+
+
+  });
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -56,8 +82,10 @@ export function AdminBlog() {
   const handleNewArticle = async (e) => {
     e.preventDefault();
     try {
-      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.title, formData.lead, formData.body);
-      await uploadImage(imageToUpload);
+      const imageId = crypto.randomUUID();
+      setImageToUploadId(imageId);
+      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), imageId, formData.title, formData.lead, formData.body);
+      await uploadImage(formData.image);
       setSubmit(!submit);
       getData(dbUrl).then(data => setBlogPosts(data));
     } catch (error) {
@@ -113,7 +141,7 @@ export function AdminBlog() {
           { editModeId !== null ? (<h3>Szerkesztés</h3>) : (null) }
 
           <label htmlFor="fileInput">
-            <input type="file" id="fileInput" onChange={ (event) => { setImageToUpload(event.target.files[0]); } }></input></label>
+            <input type="file" name="image" id="fileInput" ref={ imageRef } onChange={ (event) => { setImageToUpload(event.target.files[0]); } }></input></label>
 
           <label htmlFor="title">Cím:
             <input onChange={ handleInputChange } type="text" id="title" name="title" placeholder="" ref={ titleRef } /></label>
@@ -124,7 +152,14 @@ export function AdminBlog() {
           <label htmlFor="body">Tartalom:
             <textarea onChange={ handleInputChange } type="text" id="body" name="body" placeholder="" ref={ bodyRef } /></label>
 
-          <button type="submit" value="Submit">Mentés</button>
+
+          { isSubmitDisabled ? (
+            <button id="submitBtnDisabled" type="submit" ref={ submitButton } disabled value="Submit">Mentés</button>
+          ) : (
+            <button id="submitBtn" type="submit" ref={ submitButton } value="Submit">Mentés</button>
+          ) }
+          {/* <button type="submit" ref={ submitButton } disabled={ isSubmitDisabled } value="Submit">Mentés</button> */ }
+
           { editModeId !== null ? (
             <button onClick={ () => {
               setEditModeId(null);
@@ -157,8 +192,6 @@ export function AdminBlog() {
           );
         })
       }
-
-
     </>
   );
 }
