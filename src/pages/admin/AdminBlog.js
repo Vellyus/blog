@@ -18,20 +18,13 @@ export function AdminBlog() {
   const titleRef = useRef();
   const leadRef = useRef();
   const bodyRef = useRef();
-  const submitButton = useRef();
 
   const slugify = require("slugify");
 
-  const [imageToUpload, setImageToUpload] = useState(null);
-  const [imageToUploadId, setImageToUploadId] = useState(null);
-
   const uploadImage = async () => {
-    // state is still null on submitting
-
-    // if (imageToUpload == null || imageToUploadId == null) return;
     try {
-      const imagesRef = ref(storage, `images/${ imageToUploadId }`);
-      await uploadBytes(imagesRef, imageToUpload).then(() => {
+      const imagesRef = ref(storage, `images/${ formData.imageId }`);
+      await uploadBytes(imagesRef, formData.image).then(() => {
         console.log("image uploaded");
       });
     } catch (error) {
@@ -45,25 +38,10 @@ export function AdminBlog() {
 
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
-  // button does not rerender?
-  useEffect(() => {
-    if (imageRef?.current?.value !== "" && (imageToUpload === null || imageToUpload === undefined)) {
-      setIsSubmitDisabled(true);
-    } else setIsSubmitDisabled(false);
-
-    // if (imageRef.current.value !== "" && (imageToUpload === null || imageToUpload === undefined)) {
-    //   submitButton.current.disabled = "true";
-    // } else submitButton.current.disabled = "false";
-
-    // if (imageRef?.current?.value !== "" && imageToUpload !== null) {
-    //   submitButton.current.disabled = "false";
-    // }
-
-
-  });
-
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleInputChange = async (e) => {
+    if (e.target.id === "fileInput") {
+      setFormData({ ...formData, [e.target.name]: e.target.files[0], "imageId": crypto.randomUUID() });
+    } else setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleRemoveArticle = (id) => {
@@ -82,9 +60,7 @@ export function AdminBlog() {
   const handleNewArticle = async (e) => {
     e.preventDefault();
     try {
-      const imageId = crypto.randomUUID();
-      setImageToUploadId(imageId);
-      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), imageId, formData.title, formData.lead, formData.body);
+      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId, formData.title, formData.lead, formData.body);
       await uploadImage(formData.image);
       setSubmit(!submit);
       getData(dbUrl).then(data => setBlogPosts(data));
@@ -104,6 +80,7 @@ export function AdminBlog() {
       console.log(error);
     }
   };
+
   const handleFormReset = () => {
     setSubmit(!submit);
   };
@@ -141,7 +118,7 @@ export function AdminBlog() {
           { editModeId !== null ? (<h3>Szerkesztés</h3>) : (null) }
 
           <label htmlFor="fileInput">
-            <input type="file" name="image" id="fileInput" ref={ imageRef } onChange={ (event) => { setImageToUpload(event.target.files[0]); } }></input></label>
+            <input type="file" name="image" id="fileInput" ref={ imageRef } onChange={ handleInputChange }></input></label>
 
           <label htmlFor="title">Cím:
             <input onChange={ handleInputChange } type="text" id="title" name="title" placeholder="" ref={ titleRef } /></label>
@@ -152,13 +129,7 @@ export function AdminBlog() {
           <label htmlFor="body">Tartalom:
             <textarea onChange={ handleInputChange } type="text" id="body" name="body" placeholder="" ref={ bodyRef } /></label>
 
-
-          { isSubmitDisabled ? (
-            <button id="submitBtnDisabled" type="submit" ref={ submitButton } disabled value="Submit">Mentés</button>
-          ) : (
-            <button id="submitBtn" type="submit" ref={ submitButton } value="Submit">Mentés</button>
-          ) }
-          {/* <button type="submit" ref={ submitButton } disabled={ isSubmitDisabled } value="Submit">Mentés</button> */ }
+          <button type="submit" value="Submit">Mentés</button>
 
           { editModeId !== null ? (
             <button onClick={ () => {
