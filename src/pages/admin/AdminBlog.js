@@ -36,8 +36,6 @@ export function AdminBlog() {
     getData(dbUrl).then(data => setBlogPosts(data));
   }, [blogPosts]);
 
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
-
   const handleInputChange = async (e) => {
     if (e.target.id === "fileInput") {
       setFormData({ ...formData, [e.target.name]: e.target.files[0], "imageId": crypto.randomUUID() });
