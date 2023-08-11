@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { addOrEditBlogPost, removeBlogPost } from "../../service/blogService.js";
 import { getData } from "../../service/blogService.js";
-import { dbUrl, storage } from "../../constant";
-import { ref, uploadBytes } from "firebase/storage";
+import { dbUrl, storage, imageListRef } from "../../constant";
+import { listAll, ref, uploadBytes } from "firebase/storage";
 
 export function AdminBlog() {
 
@@ -49,6 +49,7 @@ export function AdminBlog() {
   const showEditForm = (id) => {
     setEditModeId(id);
     setFormData({
+      image: blogPosts[id].image,
       title: blogPosts[id].title,
       lead: blogPosts[id].lead,
       body: blogPosts[id].body
@@ -70,7 +71,7 @@ export function AdminBlog() {
   const handleEditArticle = async (e) => {
     e.preventDefault();
     try {
-      await addOrEditBlogPost(editModeId, formData.title, formData.lead, formData.body);
+      await addOrEditBlogPost(editModeId, formData.imageId, formData.title, formData.lead, formData.body);
       setEditModeId(null);
       setSubmit(!submit);
       getData(dbUrl).then(data => setBlogPosts(data));
@@ -99,7 +100,15 @@ export function AdminBlog() {
   });
 
   useEffect(() => {
+    listAll(imageListRef).then(res => console.log(res));;
+  }, []);
+
+  useEffect(() => {
     if (editModeId !== null) {
+      // dont try to add a value to the input, load the image above the input instead, use the input only to change it
+      // FIRST list the images on the admin page too and use that in edit mode too
+
+      // imageRef.current.value = blogPosts[editModeId].image;
       titleRef.current.value = blogPosts[editModeId].title;
       leadRef.current.value = blogPosts[editModeId].lead;
       bodyRef.current.value = blogPosts[editModeId].body;
