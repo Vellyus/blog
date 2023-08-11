@@ -5,21 +5,17 @@ import { useEffect, useState, useRef } from "react";
 import { addOrEditBlogPost, removeBlogPost } from "../../service/blogService.js";
 import { getData } from "../../service/blogService.js";
 import { dbUrl, storage, imageListRef } from "../../constant";
-import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
+import { listAll, ref, uploadBytes } from "firebase/storage";
 
 export function AdminBlog() {
 
-  const [formData, setFormData] = useState({
-    title: '',
-    lead: '',
-    body: '',
-  });
+  const [formData, setFormData] = useState(null);
   const [submit, setSubmit] = useState(false);
   const [blogPosts, setBlogPosts] = useState();
   const [editModeId, setEditModeId] = useState(null);
 
   const imageRef = useRef();
-/*   const titleRef = useRef(); */
+  const titleRef = useRef();
   const leadRef = useRef();
   const bodyRef = useRef();
 
@@ -28,10 +24,7 @@ export function AdminBlog() {
   const uploadImage = async () => {
     try {
       const imagesRef = ref(storage, `images/${ formData.imageId }`);
-      await uploadBytes(imagesRef, formData.image).then((ref) => {
-        getDownloadURL(ref).then((url) => {
-          console.log(url);
-        });
+      await uploadBytes(imagesRef, formData.image).then(() => {
         console.log("image uploaded");
       });
     } catch (error) {
@@ -41,9 +34,7 @@ export function AdminBlog() {
 
   useEffect(() => {
     getData(dbUrl).then(data => setBlogPosts(data));
-  }, []);
-
-  console.log(blogPosts);
+  }, [blogPosts]);
 
   const handleInputChange = async (e) => {
     if (e.target.id === "fileInput") {
@@ -68,10 +59,8 @@ export function AdminBlog() {
   const handleNewArticle = async (e) => {
     e.preventDefault();
     try {
-      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId || '', formData.title, formData.lead, formData.body);
-      if (!formData.imageId) {
-       await uploadImage(formData.image);
-      }
+      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId, formData.title, formData.lead, formData.body);
+      await uploadImage(formData.image);
       setSubmit(!submit);
       getData(dbUrl).then(data => setBlogPosts(data));
     } catch (error) {
@@ -108,7 +97,7 @@ export function AdminBlog() {
 
   useEffect(() => {
     !isLoggedIn && navigate("/admin", { replace: true });
-  },[isLoggedIn]);
+  });
 
   useEffect(() => {
     listAll(imageListRef).then(res => console.log(res));;
@@ -120,21 +109,12 @@ export function AdminBlog() {
       // FIRST list the images on the admin page too and use that in edit mode too
 
       // imageRef.current.value = blogPosts[editModeId].image;
- /*      titleRef.current.value = blogPosts[editModeId].title; */
-      
-   /*    setFormData(prevFormData => ({
-        ...prevFormData, 
-        title: blogPosts[editModeId].title,
-        image: blogPosts[editModeId].image,
-      })); */
-
+      titleRef.current.value = blogPosts[editModeId].title;
       leadRef.current.value = blogPosts[editModeId].lead;
       bodyRef.current.value = blogPosts[editModeId].body;
- 
     }
   }, [editModeId]);
 
-  
   return (
     <>
       <h1>AdminBlog</h1>
@@ -145,17 +125,10 @@ export function AdminBlog() {
           { editModeId !== null ? (<h3>Szerkesztés</h3>) : (null) }
 
           <label htmlFor="fileInput">
-            <input type="file" name="image" id="fileInput" onChange={ handleInputChange }></input></label>
+            <input type="file" name="image" id="fileInput" ref={ imageRef } onChange={ handleInputChange }></input></label>
 
           <label htmlFor="title">Cím:
-            <input
-              onChange={ handleInputChange }
-              type="text"
-              id="title" 
-              name="title"
-              placeholder=""
-              value={formData?.title}
-            /></label>
+            <input onChange={ handleInputChange } type="text" id="title" name="title" placeholder="" ref={ titleRef } /></label>
 
           <label htmlFor="lead">Bevezető:
             <textarea onChange={ handleInputChange } type="text" id="lead" name="lead" placeholder="" ref={ leadRef } /></label>
@@ -169,7 +142,7 @@ export function AdminBlog() {
             <button onClick={ () => {
               setEditModeId(null);
               setSubmit(false);
-/*               titleRef.current.value = ""; */
+              titleRef.current.value = "";
               leadRef.current.value = "";
               bodyRef.current.value = "";
             } }>Vissza</button>
