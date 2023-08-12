@@ -1,7 +1,7 @@
 import { logout } from "../../service/authService";
 import { useLoginContext, useLoginUpdateContext } from "../../LoginContext";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { addOrEditBlogPost, removeBlogPost } from "../../service/blogService.js";
 import { getData } from "../../service/blogService.js";
 import { dbUrl, storage, imageListRef } from "../../constant";
@@ -18,22 +18,18 @@ export function AdminBlog() {
   const [blogPosts, setBlogPosts] = useState();
   const [editModeId, setEditModeId] = useState(null);
 
-  const imageRef = useRef();
-/*   const titleRef = useRef(); */
-  const leadRef = useRef();
-  const bodyRef = useRef();
-
   const slugify = require("slugify");
 
   const uploadImage = async () => {
     try {
       const imagesRef = ref(storage, `images/${ formData.imageId }`);
-      await uploadBytes(imagesRef, formData.image).then((ref) => {
-        getDownloadURL(ref).then((url) => {
-          console.log(url);
+      await uploadBytes(imagesRef, formData.image)
+        .then((ref) => {
+          getDownloadURL(ref).then((url) => {
+            console.log(url);
+          });
+          console.log("image uploaded");
         });
-        console.log("image uploaded");
-      });
     } catch (error) {
       console.log(error);
     }
@@ -41,7 +37,7 @@ export function AdminBlog() {
 
   useEffect(() => {
     getData(dbUrl).then(data => setBlogPosts(data));
-  }, []);
+  }, [blogPosts]); // blogPosts as dep. array is needed to load new state after delettion
 
   console.log(blogPosts);
 
@@ -68,9 +64,9 @@ export function AdminBlog() {
   const handleNewArticle = async (e) => {
     e.preventDefault();
     try {
-      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId || '', formData.title, formData.lead, formData.body);
-      if (!formData.imageId) {
-       await uploadImage(formData.image);
+      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId, formData.title, formData.lead, formData.body);
+      if (formData.imageId) {
+        await uploadImage(formData.image);
       }
       setSubmit(!submit);
       getData(dbUrl).then(data => setBlogPosts(data));
@@ -108,33 +104,31 @@ export function AdminBlog() {
 
   useEffect(() => {
     !isLoggedIn && navigate("/admin", { replace: true });
-  },[isLoggedIn]);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     listAll(imageListRef).then(res => console.log(res));;
   }, []);
 
+  /*
   useEffect(() => {
     if (editModeId !== null) {
       // dont try to add a value to the input, load the image above the input instead, use the input only to change it
       // FIRST list the images on the admin page too and use that in edit mode too
 
-      // imageRef.current.value = blogPosts[editModeId].image;
- /*      titleRef.current.value = blogPosts[editModeId].title; */
-      
-   /*    setFormData(prevFormData => ({
-        ...prevFormData, 
-        title: blogPosts[editModeId].title,
-        image: blogPosts[editModeId].image,
-      })); */
+           titleRef.current.value = blogPosts[editModeId].title; 
 
-      leadRef.current.value = blogPosts[editModeId].lead;
-      bodyRef.current.value = blogPosts[editModeId].body;
- 
+    
+           /   setFormData(prevFormData => ({
+           ...prevFormData, 
+           title: blogPosts[editModeId].title,
+           image: blogPosts[editModeId].image,
+         })); 
+
     }
   }, [editModeId]);
+*/
 
-  
   return (
     <>
       <h1>AdminBlog</h1>
@@ -151,17 +145,29 @@ export function AdminBlog() {
             <input
               onChange={ handleInputChange }
               type="text"
-              id="title" 
+              id="title"
               name="title"
               placeholder=""
-              value={formData?.title}
+              value={ formData?.title }
             /></label>
 
           <label htmlFor="lead">Bevezető:
-            <textarea onChange={ handleInputChange } type="text" id="lead" name="lead" placeholder="" ref={ leadRef } /></label>
+            <textarea onChange={ handleInputChange }
+              type="text"
+              id="lead"
+              name="lead"
+              placeholder=""
+              value={ formData?.lead }
+            /></label>
 
           <label htmlFor="body">Tartalom:
-            <textarea onChange={ handleInputChange } type="text" id="body" name="body" placeholder="" ref={ bodyRef } /></label>
+            <textarea onChange={ handleInputChange }
+              type="text"
+              id="body"
+              name="body"
+              placeholder=""
+              value={ formData?.body }
+            /></label>
 
           <button type="submit" value="Submit">Mentés</button>
 
@@ -169,9 +175,6 @@ export function AdminBlog() {
             <button onClick={ () => {
               setEditModeId(null);
               setSubmit(false);
-/*               titleRef.current.value = ""; */
-              leadRef.current.value = "";
-              bodyRef.current.value = "";
             } }>Vissza</button>
           ) : (null) }
         </form>
