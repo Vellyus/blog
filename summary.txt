@@ -101,3 +101,19 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 08.01
 
 - Sikerült megoldanom a képfeltöltős problémát
+
+08.20
+
+- Az értekezésünk után módosítgattam dolgokat, csak ide elfelejtettem leírni úgyhogy most pótlom:
+
+  1. Volt egy ilyen useEffect, aminek a dep. tömbjét üresre állítottad, de az a blogPosts kell oda, különben nem tűnnek el a törölt postok, csak frissítés után
+
+   useEffect(() => {
+    getData(dbUrl).then(data => setBlogPosts(data));
+  }, [blogPosts]);
+
+  2. A képfeltöltős function paramétereihez beraktad, hogy ha nincs kép legyen egy string a kép id-je helyett, de ez azt eredményezte, hogy mindig string lett a kép id helyett, gondolom mert idő amíg felrakja a képet state-be és még nem volt elérhető.
+
+  await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId || '', formData.title, formData.lead, formData.body);
+
+  3. Kivettem a refeket
