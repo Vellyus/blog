@@ -88,6 +88,7 @@ export function AdminBlog() {
   };
 
   const handleFormReset = () => {
+    setFormData(null);
     setSubmit(!submit);
   };
 
