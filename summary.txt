@@ -102,7 +102,7 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
 
 - Sikerült megoldanom a képfeltöltős problémát
 
-08.20
+08.11
 
   1. Volt egy ilyen useEffect, aminek a dep. tömbjét üresre állítottad, de az a blogPosts kell oda, különben nem tűnnek el a törölt postok, csak frissítés után
 
