@@ -64,7 +64,7 @@ export function AdminBlog() {
   const handleNewArticle = async (e) => {
     e.preventDefault();
     try {
-      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId, formData.title, formData.lead, formData.body);
+      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId || "", formData.title, formData.lead, formData.body);
       if (formData.imageId) {
         await uploadImage(formData.image);
       }
