@@ -7,6 +7,8 @@ import { getData } from "../../service/blogService.js";
 import { dbUrl, storage, imageListRef } from "../../constant";
 import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
 
+
+
 export function AdminBlog() {
 
   const [formData, setFormData] = useState({
@@ -15,7 +17,7 @@ export function AdminBlog() {
     body: '',
   });
   const [submit, setSubmit] = useState(false);
-  const [blogPosts, setBlogPosts] = useState();
+  const [blogPosts, setBlogPosts] = useState(null);
   const [editModeId, setEditModeId] = useState(null);
 
   const slugify = require("slugify");
@@ -37,7 +39,7 @@ export function AdminBlog() {
 
   useEffect(() => {
     getData(dbUrl).then(data => setBlogPosts(data));
-  }, [blogPosts]); // blogPosts as dep. array is needed to load new state after delettion
+  }, []);
 
   console.log(blogPosts);
 
@@ -47,8 +49,11 @@ export function AdminBlog() {
     } else setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+
+
   const handleRemoveArticle = (id) => {
     removeBlogPost(id);
+    getData(dbUrl).then(data => setBlogPosts(data));
   };
 
   const showEditForm = (id) => {

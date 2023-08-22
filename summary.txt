@@ -121,3 +121,7 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
   - A form nem resetelt sikeres submit után, ezt most helyrehoztam.
 
   - Nem tudom mi van, de visszaraktam a képfeltöltős function paramétereihez a stringet ha nincs imageId és most működik...
+
+  08.22
+
+  - 11-én írtam, hogy a useEffect dep. tömbkjébe kell a blogPosts, hogy a törölt cikkek azonnal eltűnjenek, na az mégse kell oda, megoldottam máshogy és így nem renderel újra milliószor a komponens.
