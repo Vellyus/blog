@@ -19,13 +19,14 @@ export function getData() {
   });
 }
 
-export function addOrEditBlogPost(id, image, title, lead, body) {
+export function addOrEditBlogPost(id, image, title, lead, body, imageURL) {
   const reference = ref(db, id);
   return set(reference, {
     image: image,
     title: title,
     lead: lead,
-    body: body
+    body: body,
+    imageURL: imageURL
   });
 }
 

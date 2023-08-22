@@ -7,8 +7,6 @@ import { getData } from "../../service/blogService.js";
 import { dbUrl, storage, imageListRef } from "../../constant";
 import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
 
-
-
 export function AdminBlog() {
 
   const [formData, setFormData] = useState({
@@ -27,8 +25,9 @@ export function AdminBlog() {
       const imagesRef = ref(storage, `images/${ formData.imageId }`);
       await uploadBytes(imagesRef, formData.image)
         .then((ref) => {
-          getDownloadURL(ref).then((url) => {
-            console.log(url);
+          console.log(ref);
+          getDownloadURL(imagesRef).then((url) => {
+            setFormData(prevFormData => ({ ...prevFormData, imageURL: url }));
           });
           console.log("image uploaded");
         });
@@ -38,12 +37,20 @@ export function AdminBlog() {
   };
 
   useEffect(() => {
+    if (formData?.imageURL) {
+      if (!formData.imageId) return;
+      addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId || "No image uploaded", formData.title, formData.lead, formData.body, formData.imageURL);
+    }
+  }, [formData?.imageURL]);
+
+
+  useEffect(() => {
     getData(dbUrl).then(data => setBlogPosts(data));
   }, []);
 
   console.log(blogPosts);
 
-  const handleInputChange = async (e) => {
+  const handleInputChange = (e) => {
     if (e.target.id === "fileInput") {
       setFormData({ ...formData, [e.target.name]: e.target.files[0], "imageId": crypto.randomUUID() });
     } else setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -69,10 +76,10 @@ export function AdminBlog() {
   const handleNewArticle = async (e) => {
     e.preventDefault();
     try {
-      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId || "", formData.title, formData.lead, formData.body);
       if (formData.imageId) {
         await uploadImage(formData.image);
       }
+      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId || "No image uploaded", formData.title, formData.lead, formData.body, formData.imageURL || "No image uploaded");
       setSubmit(!submit);
       getData(dbUrl).then(data => setBlogPosts(data));
     } catch (error) {

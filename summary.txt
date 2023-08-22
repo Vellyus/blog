@@ -125,3 +125,5 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
   08.22
 
   - 11-én írtam, hogy a useEffect dep. tömbkjébe kell a blogPosts, hogy a törölt cikkek azonnal eltűnjenek, na az mégse kell oda, megoldottam máshogy és így nem renderel újra milliószor a komponens.
+
+  - Képfeltöltéskor a bejegyzésben már a kép downloadURL-je is el van tárolva.
