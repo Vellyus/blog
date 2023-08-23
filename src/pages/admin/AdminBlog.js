@@ -185,6 +185,7 @@ export function AdminBlog() {
             <button onClick={ () => {
               setEditModeId(null);
               setSubmit(false);
+              setFormData({ title: "", lead: "", body: "" });
             } }>Vissza</button>
           ) : (null) }
         </form>

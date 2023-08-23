@@ -21,10 +21,12 @@
     then-ben a kép url getDownloadUrl el, (async)
     then-ben a végen eltárjuk a post adatok + kép urljet
      savePostData(formData, imageUrl)
+KÉSZ
 
 - ha nincs kép
    akkor eltaroljuk a post adatok
    savePostData(formData, null)
+KÉSZ
 
 
   function savePostData(formData, imageUrl) {
