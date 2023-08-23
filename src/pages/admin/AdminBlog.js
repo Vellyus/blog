@@ -68,6 +68,7 @@ export function AdminBlog() {
       lead: blogPosts[id].lead,
       body: blogPosts[id].body
     });
+    window.scrollTo(0, 0);
   };
 
   const handleCreateOrEditArticle = (e) => {
