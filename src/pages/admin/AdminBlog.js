@@ -91,11 +91,12 @@ export function AdminBlog() {
 
   const handleEditArticle = async (e) => {
     e.preventDefault();
+    if (editModeId !== slugify(formData.title, { lower: true, strict: true })) handleRemoveArticle(editModeId);
     try {
       if (formData.imageId) {
         await uploadImage(formData.image);
       }
-      await addOrEditBlogPost(editModeId, formData.imageId || blogPosts[editModeId].image, formData.title, formData.lead, formData.body, formData.imageURL || blogPosts[editModeId].imageURL);
+      await addOrEditBlogPost(formData.title, formData.imageId || blogPosts[editModeId].image, formData.title, formData.lead, formData.body, formData.imageURL || blogPosts[editModeId].imageURL);
       setEditModeId(null);
       setSubmit(!submit);
       getData(dbUrl).then(data => setBlogPosts(data));
