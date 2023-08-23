@@ -87,7 +87,10 @@ export function AdminBlog() {
   const handleEditArticle = async (e) => {
     e.preventDefault();
     try {
-      await addOrEditBlogPost(editModeId, formData.imageId, formData.title, formData.lead, formData.body);
+      if (formData.imageId) {
+        await uploadImage(formData.image);
+      }
+      await addOrEditBlogPost(editModeId, formData.imageId || blogPosts[editModeId].image, formData.title, formData.lead, formData.body, formData.imageURL || blogPosts[editModeId].imageURL);
       setEditModeId(null);
       setSubmit(!submit);
       getData(dbUrl).then(data => setBlogPosts(data));
@@ -120,21 +123,28 @@ export function AdminBlog() {
     listAll(imageListRef).then(res => console.log(res));;
   }, []);
 
+  useEffect(() => {
+    if (editModeId) {
+      console.log(editModeId);
+      console.log(blogPosts[editModeId].image);
+    }
+  });
+
   /*
   useEffect(() => {
     if (editModeId !== null) {
       // dont try to add a value to the input, load the image above the input instead, use the input only to change it
       // FIRST list the images on the admin page too and use that in edit mode too
-
+ 
            titleRef.current.value = blogPosts[editModeId].title; 
-
+ 
     
            /   setFormData(prevFormData => ({
            ...prevFormData, 
            title: blogPosts[editModeId].title,
            image: blogPosts[editModeId].image,
          })); 
-
+ 
     }
   }, [editModeId]);
 */
@@ -213,4 +223,4 @@ export function AdminBlog() {
       }
     </>
   );
-}
+};

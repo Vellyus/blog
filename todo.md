@@ -32,3 +32,7 @@ KÉSZ
   function savePostData(formData, imageUrl) {
     // menti a vegleges adatok
   }
+
+  # Extra
+
+  - Törléskor vagy szerkesztéskor a storage-ból nem törlődnek a képek, ezt meg lehetne oldani.
