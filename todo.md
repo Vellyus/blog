@@ -1,6 +1,7 @@
 # Hozzáadható featurek
 
 - Admin blog post szerkesztésnél felugorhatna a form-hoz (window.scrollTo)
+KÉSZ
 - Ha újra töltöm az oldalt, akkor maradjon bejelentkezve a felhasznalo - localStorage - accessToken
 - Képkezelése feltöltés, mentés, vissza megjelenítés
 - Lapozhatóság
