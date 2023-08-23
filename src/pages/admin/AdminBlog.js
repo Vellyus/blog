@@ -70,6 +70,10 @@ export function AdminBlog() {
     });
   };
 
+  const handleCreateOrEditArticle = (e) => {
+    !editModeId ? handleNewArticle(e) : handleEditArticle(e);
+  };
+
   const handleNewArticle = async (e) => {
     e.preventDefault();
     try {
@@ -155,7 +159,7 @@ export function AdminBlog() {
       <button onClick={ handleLogout }>Kijelentkezés</button>
 
       { !submit ? (
-        <form onSubmit={ editModeId !== null ? (handleEditArticle) : (handleNewArticle) } id="editOrCreateArticleForm">
+        <form onSubmit={ handleCreateOrEditArticle } id="editOrCreateArticleForm">
           { editModeId !== null ? (<h3>Szerkesztés</h3>) : (null) }
 
           <label htmlFor="fileInput">

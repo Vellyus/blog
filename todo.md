@@ -11,6 +11,7 @@
 # Észrevételek
  - editModeId !== null ? (handleEditArticle) : (handleNewArticle)
    - a handler-ben lekezelni, hogy módtól függően mit csináljon 
+KÉSZ
 
 
 

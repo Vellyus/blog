@@ -133,3 +133,5 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
   - A szerkesztésből való visszalépéskor nem resetelt a form, ezt javítottam.
 
   - A szerkesztés most már kezeli a képeket is. Ha üres az input mező akkor hagyja a régit, ha pedig van kép kiválasztva akkor cseréli arra.
+
+  - Mondtad, hogy a handlerben kezeljem le hogy új bejegyzés legyen vagy szerkesztés és ne az onSubmit-ban. Hát nem egészen úgy csináltam, hanem írtam egy harmadik függvényt ami meghívja valamelyiket a state-től függően. Így maradhattak a függvény nevek, nekem így átláthatóbb.
