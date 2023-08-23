@@ -37,9 +37,8 @@ export function AdminBlog() {
   };
 
   useEffect(() => {
-    if (formData?.imageURL) {
-      if (!formData.imageId) return;
-      addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId || "No image uploaded", formData.title, formData.lead, formData.body, formData.imageURL);
+    if (formData?.imageURL && formData?.imageId) {
+      addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId, formData.title, formData.lead, formData.body, formData.imageURL);
     }
   }, [formData?.imageURL]);
 
@@ -55,8 +54,6 @@ export function AdminBlog() {
       setFormData({ ...formData, [e.target.name]: e.target.files[0], "imageId": crypto.randomUUID() });
     } else setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-
 
   const handleRemoveArticle = (id) => {
     removeBlogPost(id);
