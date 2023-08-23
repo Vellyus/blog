@@ -128,13 +128,6 @@ export function AdminBlog() {
     listAll(imageListRef).then(res => console.log(res));;
   }, []);
 
-  useEffect(() => {
-    if (editModeId) {
-      console.log(editModeId);
-      console.log(blogPosts[editModeId].image);
-    }
-  });
-
   /*
   useEffect(() => {
     if (editModeId !== null) {
