@@ -23,6 +23,7 @@ export function Article() {
       {
         blogPost &&
         <article>
+          { blogPost[id].imageURL !== "No image uploaded" ? <img className="bigImg" src={ `${ blogPost[id].imageURL }` }></img> : null }
           <h2>{ blogPost[id].title }</h2>
           <p>{ blogPost[id].lead }</p>
           <p>{ blogPost[id].body }</p>

@@ -211,6 +211,7 @@ export function AdminBlog() {
         blogPosts && Object.keys(blogPosts).map((post) => {
           return (
             <article key={ post }>
+              { blogPosts[post].imageURL !== "No image uploaded" ? <img className="smallImg" src={ `${ blogPosts[post].imageURL }` }></img> : null }
               <h3>{ blogPosts[post].title }</h3>
               <p>{ blogPosts[post].lead }</p>
               <p>{ blogPosts[post].body }</p>
@@ -222,4 +223,4 @@ export function AdminBlog() {
       }
     </>
   );
-};
+};;

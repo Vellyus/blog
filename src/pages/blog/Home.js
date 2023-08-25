@@ -24,6 +24,7 @@ export function Home() {
         blogPosts && Object.keys(blogPosts).map((post) => {
           return (
             <article key={ post }>
+              { blogPosts[post].imageURL !== "No image uploaded" ? <img className="smallImg" src={ `${ blogPosts[post].imageURL }` }></img> : null }
               <h2>{ blogPosts[post].title }</h2>
               <p>{ blogPosts[post].lead }</p>
               <button onClick={ () => handleShowArticle(post) }>Teljes bejegyzés</button>
