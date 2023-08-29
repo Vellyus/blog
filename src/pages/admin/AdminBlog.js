@@ -147,7 +147,6 @@ export function AdminBlog() {
     }
   }, [editModeId]);
 */
-
   return (
     <>
       <h1>AdminBlog</h1>
@@ -156,6 +155,17 @@ export function AdminBlog() {
       { !submit ? (
         <form onSubmit={ handleCreateOrEditArticle } id="editOrCreateArticleForm">
           { editModeId !== null ? (<h3>Szerkesztés</h3>) : (null) }
+
+          { editModeId ? (
+            formData?.imageId !== null ? (
+              blogPosts[editModeId].imageURL !== "No image uploaded" ? (
+                <img className="smallImg" src={ `${ blogPosts[editModeId].imageURL }` }></img>
+              ) : (null)
+            ) : (
+              null
+            )
+          ) : (null) }
+
 
           <label htmlFor="fileInput">
             <input type="file" name="image" id="fileInput" onChange={ handleInputChange }></input></label>
@@ -205,7 +215,7 @@ export function AdminBlog() {
       }
 
       <hr></hr>
-      <h2 id="articles-title">Blog bejegyzések:</h2>
+      <h2 id="articles-title">Blog bejegyzések:</h2>;
 
       {
         blogPosts && Object.keys(blogPosts).map((post) => {

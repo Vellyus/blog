@@ -141,3 +141,7 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
   08.25
 
   - A szerkesztés nézet kivételével megjelennek a képet a bejegyzésekhez
+
+  08.29
+
+  - Bejegyzés szerkesztésekor ha van kép megjelenik a kép előnézete, de másik kép tallózásánál nem cserélődik, mert a feltöltés form submitnél van. Ha így is jó, akkor így hagyom :)
