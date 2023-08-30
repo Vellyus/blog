@@ -1,7 +1,10 @@
 import React from 'react';
 
-export const Posts = ({ posts, handleShowArticle }) => {
-  console.log(posts);
+export const Posts = ({ posts, handleShowArticle, loading }) => {
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
+
   return (
     <ul>
       { Object.keys(posts).map(post => (

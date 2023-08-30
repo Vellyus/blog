@@ -7,12 +7,20 @@ import { Posts } from "./Posts";
 
 export function Home() {
 
-  const [blogPosts, setBlogPosts] = useState();
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getData(dbUrl).then(data => setBlogPosts(data));
-  }, [blogPosts]);
+    const fetchPosts = async () => {
+      setLoading(true);
+      const data = await getData(dbUrl);
+      setBlogPosts(data);
+      setLoading(false);
+    };
+
+    fetchPosts();
+  }, []);
 
   const handleShowArticle = (id) => {
     navigate(`/${ id }`, { replace: true });
@@ -21,7 +29,8 @@ export function Home() {
   return (
     <>
       <h1>Főoldal</h1>
-      { blogPosts && <Posts posts={ blogPosts } handleShowArticle={ handleShowArticle } /> }
+      <Posts posts={ blogPosts } handleShowArticle={ handleShowArticle } loading={ loading } />
+
     </>
   );
 }

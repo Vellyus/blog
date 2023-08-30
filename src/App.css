@@ -111,3 +111,7 @@ article {
 .bigImg {
   width: 70rem;
 }
+
+ul {
+  list-style-type: none;
+}
