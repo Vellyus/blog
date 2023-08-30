@@ -3,6 +3,7 @@ import { useState } from "react";
 import { getData } from "../../service/blogService";
 import { dbUrl } from "../../constant";
 import { useNavigate } from "react-router-dom";
+import { Posts } from "./Posts";
 
 export function Home() {
 
@@ -20,18 +21,7 @@ export function Home() {
   return (
     <>
       <h1>Főoldal</h1>
-      {
-        blogPosts && Object.keys(blogPosts).map((post) => {
-          return (
-            <article key={ post }>
-              { blogPosts[post].imageURL !== "No image uploaded" ? <img className="smallImg" src={ `${ blogPosts[post].imageURL }` }></img> : null }
-              <h2>{ blogPosts[post].title }</h2>
-              <p>{ blogPosts[post].lead }</p>
-              <button onClick={ () => handleShowArticle(post) }>Teljes bejegyzés</button>
-            </article>
-          );
-        })
-      }
+      { blogPosts && <Posts posts={ blogPosts } handleShowArticle={ handleShowArticle } /> }
     </>
   );
 }

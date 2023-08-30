@@ -45,7 +45,7 @@ export function AdminBlog() {
 
   useEffect(() => {
     getData(dbUrl).then(data => setBlogPosts(data));
-  }, []);
+  }, [formData]);
 
   console.log(blogPosts);
 
@@ -129,24 +129,6 @@ export function AdminBlog() {
     listAll(imageListRef).then(res => console.log(res));;
   }, []);
 
-  /*
-  useEffect(() => {
-    if (editModeId !== null) {
-      // dont try to add a value to the input, load the image above the input instead, use the input only to change it
-      // FIRST list the images on the admin page too and use that in edit mode too
- 
-           titleRef.current.value = blogPosts[editModeId].title; 
- 
-    
-           /   setFormData(prevFormData => ({
-           ...prevFormData, 
-           title: blogPosts[editModeId].title,
-           image: blogPosts[editModeId].image,
-         })); 
- 
-    }
-  }, [editModeId]);
-*/
   return (
     <>
       <h1>AdminBlog</h1>
@@ -215,7 +197,7 @@ export function AdminBlog() {
       }
 
       <hr></hr>
-      <h2 id="articles-title">Blog bejegyzések:</h2>;
+      <h2 id="articles-title">Blog bejegyzések:</h2>
 
       {
         blogPosts && Object.keys(blogPosts).map((post) => {
@@ -233,4 +215,4 @@ export function AdminBlog() {
       }
     </>
   );
-};;
+};
