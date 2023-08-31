@@ -115,3 +115,29 @@ article {
 ul {
   list-style-type: none;
 }
+
+nav {
+  display: block;
+  margin-bottom: 4rem;
+}
+
+.pageItem {
+  display: inline-block;
+  font-size: 1.5rem;
+  border: 1px solid black;
+  padding: .5rem 0rem;
+}
+
+.pageLink {
+  text-decoration: none;
+  padding: .5rem 1rem;
+  margin-bottom: 2rem;
+}
+
+.pageLink:hover {
+  background-color: #e7e7e7;
+}
+
+.pageLink:focus {
+  background-color: #ccc;
+}
