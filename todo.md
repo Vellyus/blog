@@ -38,3 +38,4 @@ KÉSZ
   # Extra
 
   - Törléskor vagy szerkesztéskor a storage-ból nem törlődnek a képek, ezt meg lehetne oldani.
+  - Át kéne írni a blogPosts statet, hogy rögtön array formátumban legyen
