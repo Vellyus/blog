@@ -37,8 +37,6 @@ export function Home() {
     navigate(`/${ id }`, { replace: true });
   };
 
-  console.log("currentPosts: ", currentPosts);
-
   return (
     <>
       <h1>Főoldal</h1>
