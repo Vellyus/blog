@@ -7,16 +7,17 @@ export const Posts = ({ posts, handleShowArticle, loading }) => {
 
   return (
     <ul>
-      { Object.keys(posts).map(post => (
-        <li key={ posts[post].id }>
-          <article key={ post }>
-            { posts[post].imageURL !== "No image uploaded" ? <img className="smallImg" src={ `${ posts[post].imageURL }` }></img> : null }
-            <h2>{ posts[post].title }</h2>
-            <p>{ posts[post].lead }</p>
-            <button onClick={ () => handleShowArticle(post) }>Teljes bejegyzés</button>
+      { posts.map(post => (
+        < li key={ post.id } >
+          <article key={ post.id }>
+            { post.imageURL !== "No image uploaded" ? <img className="smallImg" src={ `${ post.imageURL }` }></img> : null }
+            <h2>{ post.title }</h2>
+            <p>{ post.lead }</p>
+            <button onClick={ () => handleShowArticle(post.id) }>Teljes bejegyzés</button>
           </article>
         </li>
-      )) }
+      ))
+      }
     </ul>
   );
 };

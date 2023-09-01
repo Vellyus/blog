@@ -27,7 +27,7 @@ export function addOrEditBlogPost(id, image, title, lead, body, imageURL) {
     lead: lead,
     body: body,
     imageURL: imageURL,
-    id: id,
+    id: id
   });
 }
 
