@@ -18,8 +18,6 @@ export function Article() {
     navigate(`/`, { replace: true });
   };
 
-
-  // turning the posts to an array messed this up
   return (
     <>
       {
