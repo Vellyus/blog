@@ -128,16 +128,21 @@ nav {
   padding: .5rem 0rem;
 }
 
-.pageLink {
+.pageItem:first-of-type {
+  border-right: none;
+}
+
+.pageLink,
+.pageLink-active {
   text-decoration: none;
   padding: .5rem 1rem;
   margin-bottom: 2rem;
 }
 
 .pageLink:hover {
-  background-color: #e7e7e7;
+  background-color: #E4E4E4;
 }
 
-.pageLink:focus {
-  background-color: #ccc;
+.pageLink-active {
+  background-color: #E4E4E4;
 }

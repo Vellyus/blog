@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 
+  const [activePage, setActivePage] = useState(1);
   const pageNumbers = [];
 
 
@@ -15,8 +16,11 @@ export const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
         { pageNumbers.map(number => (
           <li key={ number } className='pageItem'>
             <a
-              onClick={ () => paginate(number) } // add onClick to set the current page number in a state, use that to style the active link -> className: activePageLink or simple pageLink
-              href='#' className='pageLink'
+              onClick={ () => {
+                paginate(number);
+                setActivePage(number);
+              } }
+              href='#' className={ activePage === number ? "pageLink-active" : "pageLink" }
             >{ number }</a>
           </li>
         )
