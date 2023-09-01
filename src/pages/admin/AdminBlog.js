@@ -96,7 +96,7 @@ export function AdminBlog() {
       if (formData.imageId) {
         await uploadImage(formData.image);
       }
-      await addOrEditBlogPost(formData.title, formData.imageId || blogPosts[editModeId].image, formData.title, formData.lead, formData.body, formData.imageURL || blogPosts[editModeId].imageURL);
+      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId || blogPosts[editModeId].image, formData.title, formData.lead, formData.body, formData.imageURL || blogPosts[editModeId].imageURL);
       setEditModeId(null);
       setSubmit(!submit);
       getData(dbUrl).then(data => setBlogPosts(data));
