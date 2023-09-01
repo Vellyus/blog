@@ -155,3 +155,7 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
   08.31
 
   - A lapozhatóság nagyjából megvan, csak okozott hibákat máshol amiket még ki kell javítanom + kezelnem kell, hogy az aktív link meg legyen jelölve
+
+  09.01
+
+  - Megvan a lapozhatóság, bár csak a főoldalon csináltam meg, az adminon nem

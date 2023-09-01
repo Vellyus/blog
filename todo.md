@@ -5,6 +5,7 @@ KÉSZ
 - Ha újra töltöm az oldalt, akkor maradjon bejelentkezve a felhasznalo - localStorage - accessToken
 - Képkezelése feltöltés, mentés, vissza megjelenítés
 - Lapozhatóság
+KÉSZ
 - CSS framework
 - night and day mode (dark mode) - contexes dolog, ujratoltes eseten: localStorage
 
