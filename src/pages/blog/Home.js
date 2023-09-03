@@ -28,7 +28,7 @@ export function Home() {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const posts = [];
-  Object.keys(blogPosts).map(postId => posts.push(blogPosts[postId]));
+  blogPosts && Object.keys(blogPosts).map(postId => posts.push(blogPosts[postId]));
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
