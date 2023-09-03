@@ -13,12 +13,11 @@ export function AdminBlog() {
     title: '',
     lead: '',
     body: '',
+    id: crypto.randomUUID()
   });
   const [submit, setSubmit] = useState(false);
   const [blogPosts, setBlogPosts] = useState(null);
   const [editModeId, setEditModeId] = useState(null);
-
-  const slugify = require("slugify");
 
   const uploadImage = async () => {
     try {
@@ -38,7 +37,7 @@ export function AdminBlog() {
 
   useEffect(() => {
     if (formData?.imageURL && formData?.imageId) {
-      addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId, formData.title, formData.lead, formData.body, formData.imageURL);
+      addOrEditBlogPost(formData.id, formData.imageId, formData.title, formData.lead, formData.body, formData.imageURL);
     }
   }, [formData?.imageURL]);
 
@@ -66,7 +65,8 @@ export function AdminBlog() {
       image: blogPosts[id].image,
       title: blogPosts[id].title,
       lead: blogPosts[id].lead,
-      body: blogPosts[id].body
+      body: blogPosts[id].body,
+      id: id
     });
     window.scrollTo(0, 0);
   };
@@ -81,7 +81,7 @@ export function AdminBlog() {
       if (formData.imageId) {
         await uploadImage(formData.image);
       }
-      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId || "No image uploaded", formData.title, formData.lead, formData.body, formData.imageURL || "No image uploaded");
+      await addOrEditBlogPost(formData.id, formData.imageId || "No image uploaded", formData.title, formData.lead, formData.body, formData.imageURL || "No image uploaded");
       setSubmit(!submit);
       getData(dbUrl).then(data => setBlogPosts(data));
     } catch (error) {
@@ -91,12 +91,11 @@ export function AdminBlog() {
 
   const handleEditArticle = async (e) => {
     e.preventDefault();
-    if (editModeId !== slugify(formData.title, { lower: true, strict: true })) handleRemoveArticle(editModeId);
     try {
       if (formData.imageId) {
         await uploadImage(formData.image);
       }
-      await addOrEditBlogPost(slugify(formData.title, { lower: true, strict: true }), formData.imageId || blogPosts[editModeId].image, formData.title, formData.lead, formData.body, formData.imageURL || blogPosts[editModeId].imageURL);
+      await addOrEditBlogPost(editModeId, formData.imageId || blogPosts[editModeId].image, formData.title, formData.lead, formData.body, formData.imageURL || blogPosts[editModeId].imageURL);
       setEditModeId(null);
       setSubmit(!submit);
       getData(dbUrl).then(data => setBlogPosts(data));

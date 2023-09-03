@@ -159,3 +159,7 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
   09.01
 
   - Megvan a lapozhatóság, bár csak a főoldalon csináltam meg, az adminon nem
+
+  09.03
+
+  - Volt egy kis probléma azzal, hogy a címből lett a slug: ha a címet változtattam a szerkesztésben akkor csinált még egy bejegyzést. Ezt kezdetben úgy orvolsoltam, hogy ha a cím nem egyezett azzal amit eredetileg betöltött a szerkesztéshez akkor törölte az eredetit mentéskor. De akadt még egy probléma a kép cseréjével. Ha a címet és a képet is változtattam akkor a képet már nem tudta mihez csatolni. Emiatt visszaraktam a generált id-t a dinamikus url-be.
