@@ -5,6 +5,7 @@ import { dbUrl } from "../../constant";
 import { useNavigate } from "react-router-dom";
 import { Posts } from "./Posts";
 import { Pagination } from "./Pagination";
+import Header from '../../components/Header';
 
 export function Home() {
 
@@ -39,7 +40,8 @@ export function Home() {
 
   return (
     <>
-      <h1>Főoldal</h1>
+      <Header />
+      <h2>Főoldal</h2>
       <Posts posts={ currentPosts } handleShowArticle={ handleShowArticle } loading={ loading } />
       <Pagination postsPerPage={ postsPerPage } totalPosts={ posts.length } paginate={ paginate } />
     </>
