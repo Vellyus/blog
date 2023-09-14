@@ -141,7 +141,7 @@ export function AdminBlog() {
           { editModeId ? (
             formData?.imageId !== null ? (
               blogPosts[editModeId].imageURL !== "No image uploaded" ? (
-                <img className="smallImg" src={ `${ blogPosts[editModeId].imageURL }` }></img>
+                <img className="smallImg" alt="" src={ `${ blogPosts[editModeId].imageURL }` }></img>
               ) : (null)
             ) : (
               null
@@ -203,7 +203,7 @@ export function AdminBlog() {
         blogPosts && Object.keys(blogPosts).map((post) => {
           return (
             <article key={ post }>
-              { blogPosts[post].imageURL !== "No image uploaded" ? <img className="smallImg" src={ `${ blogPosts[post].imageURL }` }></img> : null }
+              { blogPosts[post].imageURL !== "No image uploaded" ? <img className="smallImg" alt="" src={ `${ blogPosts[post].imageURL }` }></img> : null }
               <h3>{ blogPosts[post].title }</h3>
               <p>{ blogPosts[post].lead }</p>
               <p>{ blogPosts[post].body }</p>
