@@ -159,3 +159,7 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
   09.01
 
   - Megvan a lapozhatóság, bár csak a főoldalon csináltam meg, az adminon nem
+
+  09.14
+
+  - A cím és a kép egyidejű szerkesztése eddig nem működött, ezt a hibát most orvosoltam

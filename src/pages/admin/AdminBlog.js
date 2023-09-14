@@ -91,7 +91,6 @@ export function AdminBlog() {
 
   const handleEditArticle = async (e) => {
     e.preventDefault();
-    if (editModeId !== slugify(formData.title, { lower: true, strict: true })) handleRemoveArticle(editModeId);
     try {
       if (formData.imageId) {
         await uploadImage(formData.image);
@@ -100,6 +99,7 @@ export function AdminBlog() {
       setEditModeId(null);
       setSubmit(!submit);
       getData(dbUrl).then(data => setBlogPosts(data));
+      if (editModeId !== slugify(formData.title, { lower: true, strict: true })) handleRemoveArticle(editModeId);
     } catch (error) {
       console.log(error);
     }
