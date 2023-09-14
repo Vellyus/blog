@@ -1,5 +1,5 @@
 const ArticleBody = ({ body }) => {
-  return <p>{ body }</p>;
+  return <p data-testId="articleBody">{ body }</p>;
 };
 
 export default ArticleBody;

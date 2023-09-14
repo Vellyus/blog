@@ -1,5 +1,5 @@
 const ArticleLead = ({ lead }) => {
-  return <p>{ lead }</p>;
+  return <p data-testid="articleLead">{ lead }</p>;
 };
 
 export default ArticleLead;

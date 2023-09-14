@@ -163,3 +163,5 @@ Realtime Database url: https://blog-22bf7-default-rtdb.europe-west1.firebasedata
   09.14
 
   - A cím és a kép egyidejű szerkesztése eddig nem működött, ezt a hibát most orvosoltam
+
+  - Írtam teszteket az Article komponenseinek
