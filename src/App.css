@@ -147,3 +147,25 @@ nav {
 .pageLink-active {
   background-color: #E4E4E4;
 }
+
+@media (max-width: 47rem) {
+  .smallImg {
+    width: 25rem;
+  }
+
+  .bigImg {
+    width: 25rem;
+  }
+
+  #fileInput {
+    width: 27rem;
+  }
+
+  #newSpendingForm input {
+    width: 27rem;
+  }
+
+  textarea {
+    width: 27rem;
+  }
+}
