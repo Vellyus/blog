@@ -1,6 +1,6 @@
 import './App.css';
 // import { createBrowserRouter } from "react-router-dom";
-import { HashRouter } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 import { RouterProvider } from "react-router-dom";
 import { getData } from './service/blogService';
 import { adminRoutes } from './routes/adminRoutes';
