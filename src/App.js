@@ -12,7 +12,7 @@ import { LoginProvider } from './LoginContext';
 //   { path: "/admin", children: adminRoutes }
 // ]);
 
-const router = HashRouter([
+const router = createHashRouter([
   { path: "/", children: blogRoutes },
   { path: "/admin", children: adminRoutes }
 ]);
