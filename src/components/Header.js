@@ -1,7 +1,7 @@
 const Header = () => {
   return (
     <header data-testid="header">
-      <h1>My Blog</h1>
+      <h1>Programming languages - Blog</h1>
     </header>
   );
 };
