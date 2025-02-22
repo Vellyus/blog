@@ -204,7 +204,7 @@ export function AdminBlog() {
           return (
             <article key={post}>
               {blogPosts[post].imageURL !== "No image uploaded" ? <img className="smallImg" alt="" src={`${ blogPosts[post].imageURL }`}></img> : null}
-              <h3>{blogPosts[post].title}</h3>
+              <h2>{blogPosts[post].title}</h2>
               <p>{blogPosts[post].lead}</p>
               <div dangerouslySetInnerHTML={{ __html: blogPosts[post].body }} /><button className="editButton" onClick={() => showEditForm(post)}>Szerkesztés</button>
               <button className="removeButton" onClick={() => handleRemoveArticle(post)}>Törlés</button>
