@@ -13,7 +13,7 @@ export const Posts = ({ posts, handleShowArticle, loading }) => {
             {post.imageURL !== "No image uploaded" ? <img className="smallImg" src={`${ post.imageURL }`}></img> : null}
             <h2>{post.title}</h2>
             <p>{post.lead}</p>
-            <button onClick={() => handleShowArticle(post.id)}>Read full post</button>
+            <button onClick={() => handleShowArticle(post.id)}>Read more</button>
           </article>
         </li>
       ))
