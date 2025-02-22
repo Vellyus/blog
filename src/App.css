@@ -34,7 +34,7 @@ li {
   font-size: 1.5rem;
 }
 
-ul {
+article ul li {
   list-style-type: disc;
 }
 
