@@ -1,6 +1,6 @@
 
-const BackToMain = ({handleNavToMainPage}) => {
-  return <button className="backHome" onClick={ handleNavToMainPage }>Vissza a főoldalra</button>
+const BackToMain = ({ handleNavToMainPage }) => {
+  return <button className="backHome" onClick={handleNavToMainPage}>Home</button>
 }
 
-export default BackToMain;
+export default BackToMain

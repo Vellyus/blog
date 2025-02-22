@@ -132,11 +132,11 @@ export function AdminBlog() {
   return (
     <>
       <h1>AdminBlog</h1>
-      <button onClick={handleLogout}>Kijelentkezés</button>
+      <button onClick={handleLogout}>Sign out</button>
 
       {!submit ? (
         <form onSubmit={handleCreateOrEditArticle} id="editOrCreateArticleForm">
-          {editModeId !== null ? (<h3>Szerkesztés</h3>) : (null)}
+          {editModeId !== null ? (<h3>Edit</h3>) : (null)}
 
           {editModeId ? (
             formData?.imageId !== null ? (
@@ -152,7 +152,7 @@ export function AdminBlog() {
           <label htmlFor="fileInput">
             <input type="file" name="image" id="fileInput" onChange={handleInputChange}></input></label>
 
-          <label htmlFor="title">Cím:
+          <label htmlFor="title">Title:
             <input
               onChange={handleInputChange}
               type="text"
@@ -162,7 +162,7 @@ export function AdminBlog() {
               value={formData?.title}
             /></label>
 
-          <label htmlFor="lead">Bevezető:
+          <label htmlFor="lead">Intro:
             <textarea onChange={handleInputChange}
               type="text"
               id="lead"
@@ -171,7 +171,7 @@ export function AdminBlog() {
               value={formData?.lead}
             /></label>
 
-          <label htmlFor="body">Tartalom:
+          <label htmlFor="body">Body:
             <textarea onChange={handleInputChange}
               type="text"
               id="body"
@@ -180,24 +180,24 @@ export function AdminBlog() {
               value={formData?.body}
             /></label>
 
-          <button type="submit" value="Submit">Mentés</button>
+          <button type="submit" value="Submit">Save</button>
 
           {editModeId !== null ? (
             <button onClick={() => {
               setEditModeId(null)
               setSubmit(false)
               setFormData({ title: "", lead: "", body: "" })
-            }}>Vissza</button>
+            }}>Cancel</button>
           ) : (null)}
         </form>
       ) : (<div className="submitted">
-        <h3>Sikeresen mentve!</h3>
-        <button onClick={handleFormReset}>Új blog post</button>
+        <h3>Post saved!</h3>
+        <button onClick={handleFormReset}>New blog post</button>
       </div>)
       }
 
       <hr></hr>
-      <h2 id="articles-title">Blog bejegyzések:</h2>
+      <h2 id="articles-title">Blog posts:</h2>
 
       {
         blogPosts && Object.keys(blogPosts).map((post) => {
@@ -206,8 +206,8 @@ export function AdminBlog() {
               {blogPosts[post].imageURL !== "No image uploaded" ? <img className="smallImg" alt="" src={`${ blogPosts[post].imageURL }`}></img> : null}
               <h2>{blogPosts[post].title}</h2>
               <p>{blogPosts[post].lead}</p>
-              <div dangerouslySetInnerHTML={{ __html: blogPosts[post].body }} /><button className="editButton" onClick={() => showEditForm(post)}>Szerkesztés</button>
-              <button className="removeButton" onClick={() => handleRemoveArticle(post)}>Törlés</button>
+              <div dangerouslySetInnerHTML={{ __html: blogPosts[post].body }} /><button className="editButton" onClick={() => showEditForm(post)}>Edit</button>
+              <button className="removeButton" onClick={() => handleRemoveArticle(post)}>Remove</button>
             </article>
           )
         })
