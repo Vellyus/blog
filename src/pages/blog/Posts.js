@@ -6,7 +6,7 @@ export const Posts = ({ posts, handleShowArticle, loading }) => {
   }
 
   return (
-    <ul>
+    <ul className='posts-grid'>
       {posts.map(post => (
         < li key={post.id} >
           <article key={post.id}>

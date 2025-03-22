@@ -155,6 +155,21 @@ nav {
   background-color: #e4e4e4;
 }
 
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+}
+
+@media (max-width: 70rem) {
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 47rem) {
   .smallImg {
     width: 25rem;
@@ -174,5 +189,10 @@ nav {
 
   textarea {
     width: 27rem;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
   }
 }
