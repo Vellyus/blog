@@ -35,6 +35,8 @@ h1 {
 
 h2 {
   font-size: 2.3rem;
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
 }
 
 h3 {
@@ -45,12 +47,13 @@ h3 {
   text-decoration: underline;
 }
 
-article h2 {
+.articlePage h2 {
+  font-size: 3rem;
   margin-top: 3rem;
   margin-bottom: 0.5rem;
 }
 
-article h3 {
+.articlePage h3 {
   margin-top: 2rem;
   margin-bottom: 0.5rem;
 }
@@ -128,12 +131,9 @@ hr {
   margin: 4rem 0;
 }
 
-article {
-  margin: 4rem 0;
-}
-
 .smallImg {
-  width: 20rem;
+  max-width: 20rem;
+  max-height: 20rem;
 }
 
 .bigImg {
@@ -146,7 +146,7 @@ ul {
 
 nav {
   display: block;
-  margin-bottom: 4rem;
+  margin: 4rem 0;
 }
 
 .pageItem {
@@ -184,8 +184,8 @@ nav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(auto-fill, 1fr);
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
+  grid-column-gap: 4rem;
+  grid-row-gap: 4rem;
 }
 
 @media (max-width: 70rem) {

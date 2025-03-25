@@ -24,7 +24,7 @@ export function Article() {
 
   return (
     <>
-      <main>
+      <main className="articlePage">
         {
           blogPost &&
           <article>
