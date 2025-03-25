@@ -23,21 +23,19 @@ export function Article() {
   }
 
   return (
-    <>
-      <main className="articlePage">
-        {
-          blogPost &&
-          <article>
-            {blogPost[id].imageURL !== "No image uploaded" ? <img className="bigImg" alt="article" src={`${ blogPost[id].imageURL }`}></img> : null}
-            <ArticleTitle title={blogPost[id].title} />
-            <ArticleLead lead={blogPost[id].lead} />
-            <ArticleBody body={blogPost[id].body} />
-            {/* <p>{ blogPost[id].lead }</p> */}
-            {/* <p>{ blogPost[id].body }</p> */}
-            <BackToMain handleNavToMainPage={handleNavToMainPage} />
-          </article>
-        }
-      </main>
-    </>
+    <main className="articlePage">
+      {
+        blogPost &&
+        <article>
+          {blogPost[id].imageURL !== "No image uploaded" ? <img className="bigImg" alt="article" src={`${ blogPost[id].imageURL }`}></img> : null}
+          <ArticleTitle title={blogPost[id].title} />
+          <ArticleLead lead={blogPost[id].lead} />
+          <ArticleBody body={blogPost[id].body} />
+          {/* <p>{ blogPost[id].lead }</p> */}
+          {/* <p>{ blogPost[id].body }</p> */}
+          <BackToMain handleNavToMainPage={handleNavToMainPage} />
+        </article>
+      }
+    </main>
   )
 }
