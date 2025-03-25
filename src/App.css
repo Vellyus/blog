@@ -45,10 +45,15 @@ h3 {
   text-decoration: underline;
 }
 
-h3 {
-  font-size: 2rem;
+article h2 {
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
 }
 
+article h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
 p,
 li {
   font-size: 1.5rem;
@@ -148,14 +153,14 @@ nav {
   display: inline-block;
   font-size: 1.5rem;
   background-color: #54b2ff;
-  /* border: 1px solid black; */
   padding: 0.5rem 0rem;
   margin: 0 0.5rem;
-  border-radius: 0.2rem;
+  border-radius: 0.3rem;
 }
 
 .pageItem a {
   color: white;
+  border-radius: 0.4rem;
 }
 
 .pageLink,
@@ -167,13 +172,11 @@ nav {
 }
 
 .pageLink:hover {
-  /* background-color: #e4e4e4; */
   font-size: 2rem;
 }
 
 .pageLink-active {
-  /* background-color: #e4e4e4; */
-  border: 2px solid #102333;
+  border: 2.5px solid #214766;
   font-size: 2rem;
 }
 
