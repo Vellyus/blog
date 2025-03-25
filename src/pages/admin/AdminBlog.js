@@ -130,7 +130,7 @@ export function AdminBlog() {
   }, [])
 
   return (
-    <>
+    <main>
       <h1>AdminBlog</h1>
       <button onClick={handleLogout}>Sign out</button>
 
@@ -212,6 +212,6 @@ export function AdminBlog() {
           )
         })
       }
-    </>
+    </main>
   )
 }
