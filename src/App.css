@@ -147,13 +147,15 @@ nav {
 .pageItem {
   display: inline-block;
   font-size: 1.5rem;
-  border: 1px solid black;
+  background-color: #54b2ff;
+  /* border: 1px solid black; */
   padding: 0.5rem 0rem;
-  border-right: none;
+  margin: 0 0.5rem;
+  border-radius: 0.2rem;
 }
 
-.pageItem:last-of-type {
-  border-right: 1px solid black;
+.pageItem a {
+  color: white;
 }
 
 .pageLink,
@@ -161,14 +163,18 @@ nav {
   text-decoration: none;
   padding: 0.5rem 1rem;
   margin-bottom: 2rem;
+  border-radius: 0.2rem;
 }
 
 .pageLink:hover {
-  background-color: #e4e4e4;
+  /* background-color: #e4e4e4; */
+  font-size: 2rem;
 }
 
 .pageLink-active {
-  background-color: #e4e4e4;
+  /* background-color: #e4e4e4; */
+  border: 2px solid #102333;
+  font-size: 2rem;
 }
 
 .posts-grid {
