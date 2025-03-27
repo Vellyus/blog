@@ -41,7 +41,7 @@ export function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main className="homePage">
         <h2>Home</h2>
         <Posts posts={currentPosts} handleShowArticle={handleShowArticle} loading={loading} />
         <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} />
