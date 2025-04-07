@@ -1,5 +1,5 @@
 const ArticleBody = ({ body }) => {
-  return <div data-testId="articleBody" dangerouslySetInnerHTML={{ __html: body }} />
+  return <div data-testid="articleBody" dangerouslySetInnerHTML={{ __html: body }} />
 }
 
 export default ArticleBody
