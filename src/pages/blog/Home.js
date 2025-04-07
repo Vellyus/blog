@@ -35,7 +35,7 @@ export function Home() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   const handleShowArticle = (id) => {
-    navigate(`/${ id }`, { replace: true })
+    navigate(`/article/${ id }`, { replace: true })
   }
 
   return (
